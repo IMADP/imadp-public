@@ -1,0 +1,14 @@
+  =================================================================================================
+  
+   Share SVN Project                           
+   
+  =================================================================================================
+ 
+ 	- Right click project > Team > Share Project
+    - Choose SVN
+    - Browse for existing folder and choose a branch, following existing structure
+    - Add the following to SVN Ignore by right clicking in Synchronize view:
+     - .settings
+     - .classpath
+     - .project
+     - target

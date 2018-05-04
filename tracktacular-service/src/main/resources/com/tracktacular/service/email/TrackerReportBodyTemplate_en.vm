@@ -1,0 +1,129 @@
+<table width="100%" cellpadding="10" style="border: 1px solid #C0C0C0;">
+
+	<tr>
+		<td style="font-size: large; font-weight: bold;" align="left" bgcolor="#C6D5DF">Body Report</td>
+	</tr>
+	
+	#if(!$trackerReport.enabled)
+		<tr>
+			<td>
+			   You have no body entries.     
+			</td>
+		</tr>
+	#else
+		<tr cellpadding="5">
+			<td align="left" bgcolor="#e3eaf0">
+			   Your Next Recommended Measurement Date is $dateTool.format('MMM d, yyyy', $trackerReport.recommendedTestDate.millis)	
+			</td>
+		</tr>
+		
+		#if($trackerReport.alerts)
+	        <tr cellpadding="5">
+				<td align="left" bgcolor="#FFCBCB">
+				   Your recommended measurement date is overdue!
+				</td>
+			</tr>
+        #end
+        
+		#if($trackerReport.body.height)
+		<tr>
+			<td>
+			   <b>Height:</b> $trackerReport.body.height
+			</td>
+		</tr>
+		#end
+		#if($trackerReport.body.neck)
+		<tr>
+			<td>
+			   <b>Neck:</b> $trackerReport.body.neck
+			</td>
+		</tr>
+		#end
+		#if($trackerReport.body.chest)
+		<tr>
+			<td>
+			   <b>Chest:</b> $trackerReport.body.chest
+			</td>
+		</tr>
+		#end
+		#if($trackerReport.body.biceps)
+		<tr>
+			<td>
+			   <b>Biceps:</b> $trackerReport.body.biceps
+			</td>
+		</tr>
+		#end
+		#if($trackerReport.body.forearms)
+		<tr>
+			<td>
+			   <b>Forearms:</b> $trackerReport.body.forearms
+			</td>
+		</tr>
+		#end
+		#if($trackerReport.body.wrists)
+		<tr>
+			<td>
+			   <b>Wrists:</b> $trackerReport.body.wrists
+			</td>
+		</tr>
+		#end
+		#if($trackerReport.body.waist)
+		<tr>
+			<td>
+			   <b>Waist:</b> $trackerReport.body.waist
+			</td>
+		</tr>
+		#end
+		#if($trackerReport.body.hips)
+		<tr>
+			<td>
+			   <b>Hips:</b> $trackerReport.body.hips
+			</td>
+		</tr>
+		#end
+		#if($trackerReport.body.thighs)
+		<tr>
+			<td>
+			   <b>Thighs:</b> $trackerReport.body.thighs
+			</td>
+		</tr>
+		#end
+		#if($trackerReport.body.calves)
+		<tr>
+			<td>
+			   <b>Calves:</b> $trackerReport.body.calves
+			</td>
+		</tr>
+		#end
+		#if($trackerReport.body.ankles)
+		<tr>
+			<td>
+			   <b>Ankles:</b> $trackerReport.body.ankles
+			</td>
+		</tr>
+		#end
+		#if($trackerReport.body.feet)
+		<tr>
+			<td>
+			   <b>Feet:</b> $trackerReport.body.feet
+			</td>
+		</tr>
+		#end
+		#if($trackerReport.body.weight)
+		<tr>
+			<td>
+			   <b>Weight:</b> $trackerReport.body.weight
+			</td>
+		</tr>
+		#end
+		#if($trackerReport.body.bodyFat)
+		<tr>
+			<td>
+			   <b>Body Fat:</b> $trackerReport.body.bodyFat
+			</td>
+		</tr>
+		#end
+		
+	#end
+	
+</table>	

@@ -1,0 +1,50 @@
+package com.tracktacular.web.page.tracker.goal;
+
+import com.tracktacular.service.tracker.Tracker;
+import com.tracktacular.web.page.tracker.TrackerActionBean;
+import com.tracktacular.web.page.tracker.TrackerPage;
+
+/**
+ * GoalTrackerPage
+ *
+ * Enumerated page values.
+ *
+ * @author Anthony DePalma
+ * @version 1.0
+ */
+public enum GoalTrackerPage implements TrackerPage {
+	ABOUT(AboutActionBean.class),
+	GOALS(GoalsActionBean.class),
+	COMPLETED(CompletedActionBean.class),
+	REPORT(ReportActionBean.class),
+	PREFERENCES(PreferencesActionBean.class),
+	DELETED(DeletedActionBean.class);
+
+	private Class<? extends GoalTrackerActionBean> actionBean;
+
+	// constructor
+    private GoalTrackerPage(Class<? extends GoalTrackerActionBean> actionBean) {
+        this.actionBean = actionBean;
+    }
+
+    @Override
+    public Tracker getTracker() {
+    	return Tracker.GOAL;
+    }
+
+    @Override
+    public String getTrackerPageKey() {
+    	return getClass().getSimpleName() + '.' + name();
+    }
+
+    @Override
+	public TrackerPage getDefault() {
+		return GOALS;
+	}
+
+	@Override
+	public Class<? extends TrackerActionBean<?,?>> getActionBean() {
+		return actionBean;
+	}
+
+}

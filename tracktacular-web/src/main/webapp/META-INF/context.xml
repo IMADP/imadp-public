@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/">
+
+	<ResourceLink name="jdbc/tracktacular" global="jdbc/tracktacular" 
+	 type="com.mchange.v2.c3p0.ComboPooledDataSource"/>
+
+</Context>

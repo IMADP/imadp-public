@@ -1,0 +1,47 @@
+<table width="100%" cellpadding="10" style="border: 1px solid #C0C0C0;">
+
+	<tr>
+		<td style="font-size: large; font-weight: bold;" align="left" bgcolor="#C6D5DF">Dreams Report</td>
+	</tr>
+	
+	#if(!$trackerReport.enabled)
+		<tr>
+			<td>
+			  You have no recorded dreams.     
+			</td>
+		</tr>
+	#else
+		<tr cellpadding="5">
+			<td align="left" bgcolor="#e3eaf0">
+			   $trackerReport.dreamCount Recorded #if($trackerReport.dreamCount == 1) Dream #else Dreams #end
+			</td>
+		</tr>
+		<tr>
+			<td>
+			  
+				<table>
+					<tr>
+						#foreach($allDreams in $trackerReport.allDreamsByMonthList )
+							<td>
+								$allDreams
+							</td>
+						#end
+					</tr>
+					<tr>
+						#foreach($month in $trackerReport.dreamsMonthList )
+				 			<td>
+				 				$dateTool.format('MMM', $month)	
+							</td>
+				  		#end
+					</tr>
+				</table>
+
+
+			<j:array name="dreamsMonthList" items="${trackerReport.dreamsMonthList}"/> 		
+			<j:array name="allDreamsByMonthList" items="${trackerReport.allDreamsByMonthList}"/> 		
+			 
+			</td>
+		</tr>
+	#end
+	
+</table>	

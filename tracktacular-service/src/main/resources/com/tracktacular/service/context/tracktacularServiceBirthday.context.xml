@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+  -
+  - Service context
+  -
+  - Defines beans specific to application services.
+  -
+  -->
+  
+<beans>
+
+
+	<!-- Birthday Service -->	
+	<bean id="birthday_birthdayDao" parent="persistableDao" >
+		<property name="entityClass" value="com.tracktacular.service.tracker.birthday.Birthday"/>
+	</bean> 
+	
+	<bean id="birthday_birthdayService" parent="serviceComponent" 
+	class="com.tracktacular.service.tracker.birthday.BirthdayServiceImpl" >
+		<property name="dao" ref="birthday_birthdayDao"/>
+		<property name="findByUserFindCriteriaCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="birthday_birthdayService.findByUserFindCriteriaCache"/>
+			</bean>
+		</property>		
+		<property name="findCountByUserFindCriteriaCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="birthday_birthdayService.findCountByUserFindCriteriaCache"/>
+			</bean>
+		</property>	
+	</bean>
+	
+	
+	<!-- 
+	
+		Facade
+	
+	 -->
+	 
+	 
+	<bean id="birthdayTrackerFacade" parent="coreComponent" 
+	class="com.tracktacular.service.tracker.birthday.BirthdayTrackerFacadeImpl" >
+		<property name="birthdayService" ref="birthday_birthdayService"/>
+	</bean>
+	
+	
+</beans>

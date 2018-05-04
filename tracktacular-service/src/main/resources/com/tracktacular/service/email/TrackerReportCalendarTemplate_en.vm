@@ -1,0 +1,45 @@
+<table width="100%" cellpadding="10" style="border: 1px solid #C0C0C0;">
+
+	<tr>
+		<td style="font-size: large; font-weight: bold;" align="left" bgcolor="#C6D5DF">Calendar Report</td>
+	</tr>
+	
+	#if(!$trackerReport.enabled)
+		<tr>
+			<td>
+			   You have no calendar entries this week.   
+			</td>
+		</tr>
+	#else
+		<tr cellpadding="5">
+			<td align="left" bgcolor="#e3eaf0">
+			   $trackerReport.calendarWeek.itemCount Calendar #if($trackerReport.calendarWeek.itemCount == 1) Entry #else Entries #end for the Week	
+			</td>
+		</tr>
+		
+		#foreach($calendarEntry in $trackerReport.calendarEntryAlerts)
+	        <tr cellpadding="5">
+				<td align="left" bgcolor="#FFCBCB">
+				 	Event <i>${calendarEntry.name}</i> is today!
+				</td>
+			</tr>
+        #end
+		
+		#foreach($day in $trackerReport.calendarWeek.days )
+ 		#foreach($item in $day.items )
+ 			<tr>
+				<td>
+					$item.calendarEntry.name <br/>
+					#if($item.calendarEntry.description)<i>$item.calendarEntry.description</i> <br/>#end
+					<span style="font-size: small">
+						$dateTool.format('EEEE MMMM d, yyyy', $day.date.millis)	
+						#if($day.startTimeString) $dateTool.format('h:mm a', $day.startTime.millis) #end
+						#if($day.endTimeString) - $dateTool.format('h:mm a', $day.endTime.millis)	 #end
+					</span> 
+				</td>
+			</tr>
+		#end
+		#end
+	#end
+	
+</table>	

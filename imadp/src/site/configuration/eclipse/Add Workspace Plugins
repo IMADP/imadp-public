@@ -1,0 +1,15 @@
+  =================================================================================================
+  
+   Add Workspace Plugins                                    
+   
+  =================================================================================================
+ 
+ 	- Help > Install New Software
+ 	- Add the update URLs for the following plugins (Locate the URLs online)
+  		- Subclipse
+    	- SpringIDE
+    	- ADJT
+    	- M2E WTP
+    	
+    - Ensure that eclipse is running within a JDK by adding to eclipse shortcut:
+      -vm C:\Progra~1\Java\jdk1.6.0_21\bin\javaw.exe    	

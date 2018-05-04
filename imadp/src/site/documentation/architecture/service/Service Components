@@ -1,0 +1,9 @@
+  =================================================================================================
+  
+   Service Components                                         
+   
+  =================================================================================================
+ 
+    Service components represent the high level use-cases for applications. Similar to core 
+    components, they are often managed by spring through the same lifecycle methods init() and
+    destroy().

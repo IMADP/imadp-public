@@ -1,0 +1,36 @@
+<table width="100%" cellpadding="10" style="border: 1px solid #C0C0C0;">
+
+	<tr>
+		<td style="font-size: large; font-weight: bold;" align="left" bgcolor="#C6D5DF">Journals Report</td>
+	</tr>
+	
+	#if(!$trackerReport.enabled)
+		<tr>
+			<td>
+			   You have no journals. 
+			</td>
+		</tr>
+	#else
+		#foreach($journal in $trackerReport.lateJournals)
+	        <tr cellpadding="5">
+				<td align="left" bgcolor="#FFCBCB">
+				 	Journal <i>${journal.name}</i> is being neglected!
+				</td>
+			</tr>
+        #end
+		
+		<tr cellpadding="5">
+			<td align="left" bgcolor="#e3eaf0">
+			   $trackerReport.activeJournalsCount #if($trackerReport.activeJournalsCount == 1) Journal #else Journals #end
+			</td>
+		</tr>
+		<tr>
+			<td>
+				#foreach($journalDto in $trackerReport.activeJournalsList )
+		 			<a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-journal/journal-$journalDto.journal.uid/$journalDto.journal.nameSlug">$journalDto.journal.name</a>
+		 		#end
+			</td>
+		</tr>
+	#end
+	
+</table>	

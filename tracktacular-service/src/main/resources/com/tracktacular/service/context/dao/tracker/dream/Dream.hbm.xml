@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    
+    <typedef name="encryptedString" class="org.jasypt.hibernate.type.EncryptedStringType">
+       <param name="encryptorRegisteredName">hibernateStringEncryptor</param>
+    </typedef>
+    
+    <class name="com.tracktacular.service.tracker.dream.Dream" table="tracker_dream_dreams">
+	
+		<!-- Id -->
+    	<id name="id" column="id" type="long" unsaved-value="null">
+			<generator class="identity"/>
+		</id>
+		
+		
+		<!-- Version -->
+		<version name="version" column="version" unsaved-value="undefined" />
+		
+		
+		<!-- Global Properties -->
+		<property name="uid" column="uid" 
+		type="java.lang.String" length="36" unique="true" not-null="true" />
+		
+		<property name="timeCreated" column="time_created" 
+		type="long"	not-null="true" />
+		
+		<property name="timeModified" column="time_modified" 
+		type="long"	not-null="true" />
+		
+		<property name="persistableStateDate" column="persistable_state_date" 
+		type="org.joda.time.contrib.hibernate.PersistentDateTime" not-null="false" />
+		
+		<property name="persistableState" column="persistable_state" access="field"
+		length="10" not-null="false"> 
+			<type name="org.hibernate.type.EnumType"> 
+				<param name="enumClass">com.imadp.dao.PersistableState</param> 
+				<param name="type">12</param> 
+			</type> 
+		</property> 
+		
+		
+		<!-- Properties -->
+		<property name="title" column="title" 
+		length="1024" type="encryptedString" not-null="false" />
+		
+		<property name="content" column="content" 
+		length="100000" type="encryptedString" not-null="true" />
+		
+		<property name="analysis" column="analysis" 
+		length="100000" type="encryptedString" not-null="false" />
+		
+		<property name="lucid" column="lucid" 
+		type="boolean" not-null="false" />
+		
+		<property name="favorite" column="favorite" 
+		type="boolean" not-null="false" />
+		
+		<property name="date" column="date" 
+		type="org.joda.time.contrib.hibernate.PersistentDateTime" not-null="true" />
+		
+		
+		<!-- References -->
+		<set name="dreamsigns" table="tracker_dream_dreamsigns" cascade="none" lazy="false" fetch="subselect" order-by="name"
+			where="persistable_state = (select persistable_state from tracker_dream_dreams dream where dream.id = dream_id)" >
+        	<key column="dream_id" on-delete="noaction" update="false"/>
+        	<one-to-many class="com.tracktacular.service.tracker.dream.Dreamsign"/>
+     	</set>	
+	    	
+	    <many-to-one name="user" column="user_id" cascade="none" lazy="false" fetch="join" 
+		class="com.imadp.service.user.User" not-null="false" />
+						 		 		
+		<!-- Queries -->
+		<query name="getDreamSums">
+		<![CDATA[
+			SELECT
+				MONTH(dream.date),
+				YEAR(dream.date),
+				SUM(1),
+				SUM(CASE WHEN dream.favorite = true THEN 1 ELSE 0 END),
+				SUM(CASE WHEN dream.lucid = true THEN 1 ELSE 0 END)
+			FROM	
+				com.tracktacular.service.tracker.dream.Dream dream
+			WHERE
+				date >= :earliestDate
+			AND user = :user
+			AND dream.persistableState = 'ACTIVE'	
+			GROUP BY 
+				MONTH(dream.date),
+				YEAR(dream.date)
+			ORDER BY
+				YEAR(dream.date) ASC,
+				MONTH(dream.date) ASC	
+		]]>
+		</query>
+				
+						 		 		
+    </class>
+</hibernate-mapping>

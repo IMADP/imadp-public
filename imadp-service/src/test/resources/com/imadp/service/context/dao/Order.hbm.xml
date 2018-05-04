@@ -1,0 +1,238 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.imadp.service.commerce.order.Order" table="orders">
+	
+		<!-- Id -->
+    	<id name="id" column="id" type="long" unsaved-value="null">
+			<generator class="identity"/>
+		</id>
+		
+		
+		<!-- Version -->
+		<version name="version" column="version" unsaved-value="undefined" />
+		
+		
+		<!-- Global Properties -->
+		<property name="uid" column="uid" 
+		type="java.lang.String" length="36" unique="true" not-null="true" />
+		
+		<property name="timeCreated" column="time_created" 
+		type="long"	not-null="true" />
+		
+		<property name="timeModified" column="time_modified" 
+		type="long"	not-null="true" />
+		
+		<property name="persistableStateDate" column="persistable_state_date" 
+		type="org.joda.time.contrib.hibernate.PersistentDateTime" not-null="false" />
+		
+		<property name="persistableState" column="persistable_state" access="field"
+		length="10" not-null="false"> 
+			<type name="org.hibernate.type.EnumType"> 
+				<param name="enumClass">com.imadp.dao.PersistableState</param> 
+				<param name="type">12</param> 
+			</type> 
+		</property> 
+		
+		
+		<!-- Properties -->		
+		<property name="date" column="date" 
+		type="org.joda.time.contrib.hibernate.PersistentDateTime" not-null="false" />
+				
+		<property name="locale" column="locale" 
+		type="java.util.Locale" not-null="false" />
+				
+		<property name="googleClickId" column="google_click_id" 
+		type="java.lang.String" length="1024" not-null="false" />
+		
+		<property name="googleConversionId" column="google_conversion_id" 
+		type="java.lang.String" length="1024" not-null="false" />
+				
+		<property name="googleCommerceTracking" column="google_commerce_tracking" 
+		type="boolean" not-null="true" />
+		
+		<component name="orderInvoice" class="com.imadp.service.commerce.order.OrderInvoice">
+			
+			<component name="itemsPrice" class="com.imadp.core.money.Money">
+				
+				<property name="amount" column="items_price_amount" access="field"
+				type="java.math.BigDecimal" not-null="false" />
+				
+				<property name="currency" column="items_price_currency" access="field"
+				type="java.util.Currency" length="3" not-null="false" />			
+			
+			</component>	
+			
+			<component name="shippingPrice" class="com.imadp.core.money.Money">
+				
+				<property name="amount" column="shipping_price_amount" access="field"
+				type="java.math.BigDecimal" not-null="false" />
+				
+				<property name="currency" column="shipping_price_currency" access="field"
+				type="java.util.Currency" length="3" not-null="false" />			
+			
+			</component>	
+			
+			<component name="taxPrice" class="com.imadp.core.money.Money">
+				
+				<property name="amount" column="tax_price_amount" access="field"
+				type="java.math.BigDecimal" not-null="false" />
+				
+				<property name="currency" column="tax_price_currency" access="field"
+				type="java.util.Currency" length="3" not-null="false" />			
+			
+			</component>	
+			
+			<component name="discountsPrice" class="com.imadp.core.money.Money">
+				
+				<property name="amount" column="discounts_price_amount" access="field"
+				type="java.math.BigDecimal" not-null="false" />
+				
+				<property name="currency" column="discounts_price_currency" access="field"
+				type="java.util.Currency" length="3" not-null="false" />			
+			
+			</component>	
+			
+			<component name="totalPrice" class="com.imadp.core.money.Money">
+				
+				<property name="amount" column="total_price_amount" access="field"
+				type="java.math.BigDecimal" not-null="false" />
+				
+				<property name="currency" column="total_price_currency" access="field"
+				type="java.util.Currency" length="3" not-null="false" />			
+			
+			</component>	
+			
+			<list name="items" table="order_items" cascade="all" lazy="false" fetch="subselect" >
+	        	<key column="order_id"/>
+	        	<list-index column="list_index"/>
+	        	<one-to-many class="com.imadp.service.commerce.order.OrderItem"/>
+	     	</list>	
+	     	
+			<list name="discounts" table="order_discounts" cascade="all" lazy="false" fetch="subselect">
+	        	<key column="order_id"/>
+	        	<list-index column="list_index"/>
+	        	<one-to-many class="com.imadp.service.commerce.order.OrderDiscount"/>
+	     	</list>	
+			
+		</component>
+					
+		<component name="billingDetails" class="com.imadp.service.commerce.order.billing.BillingDetails">
+			
+			<property name="firstName" column="billing_first_name" 
+			length="255" type="java.lang.String" not-null="false" />
+			
+			<property name="lastName" column="billing_last_name" 
+			length="255" type="java.lang.String" not-null="false" />			
+			
+			<property name="address1" column="billing_address_1"
+			length="255" type="java.lang.String" not-null="false"/>
+			
+			<property name="address2" column="billing_address_2"
+			length="255" type="java.lang.String" not-null="false"/>
+			
+			<property name="city" column="billing_city"
+			length="255" type="java.lang.String" not-null="false"/>
+			
+			<property name="state" column="billing_state"
+			length="255" type="java.lang.String" not-null="false"/>
+			
+			<property name="postalCode" column="billing_postal_code"
+			length="255" type="java.lang.String" not-null="false"/>
+			
+			<property name="homePhone" column="billing_home_phone" 
+			length="25" type="java.lang.String" not-null="false"/>
+			
+			<property name="email" column="billing_email" 
+			length="255" type="java.lang.String" not-null="false"/>
+			
+			<many-to-one name="country" column="billing_country_id"  cascade="none" lazy="false" fetch="join"
+			class="com.imadp.service.location.country.Country" not-null="false"/>
+			
+		</component>
+	
+		<component name="billingReceipt" class="com.imadp.service.commerce.order.billing.BillingReceipt">
+			
+			<list name="transactions" table="billing_transactions" cascade="all" lazy="false" fetch="subselect">
+	        	<key column="order_id"/>
+	        	<list-index column="list_index"/>
+	        	<one-to-many class="com.imadp.service.commerce.order.billing.BillingTransaction"/>
+	     	</list>	
+	     	
+			<property name="billingStatus" column="billing_status" not-null="false"
+			length="255"> 
+				<type name="org.hibernate.type.EnumType"> 
+					<param name="enumClass">com.imadp.service.commerce.order.billing.BillingTransaction$BillingTransactionStatus</param> 
+					<param name="type">12</param> 
+				</type> 				
+			</property> 
+			
+		</component>
+	
+		<component name="shippingDetails" class="com.imadp.service.commerce.order.shipping.ShippingDetails">
+			
+			<property name="firstName" column="shipping_first_name" 
+			length="255" type="java.lang.String" not-null="false" />
+			
+			<property name="lastName" column="shipping_last_name" 
+			length="255" type="java.lang.String" not-null="false" />
+			
+			<property name="address1" column="shipping_address_1"
+			length="255" type="java.lang.String" not-null="false"/>
+			
+			<property name="address2" column="shipping_address_2"
+			length="255" type="java.lang.String" not-null="false"/>
+			
+			<property name="city" column="shipping_city"
+			length="255" type="java.lang.String" not-null="false"/>
+			
+			<property name="state" column="shipping_state"
+			length="255" type="java.lang.String" not-null="false"/>
+			
+			<property name="postalCode" column="shipping_postal_code"
+			length="255" type="java.lang.String" not-null="false"/>
+			
+			<property name="homePhone" column="shipping_home_phone" 
+			length="25" type="java.lang.String" not-null="false"/>
+			
+			<property name="email" column="shipping_email"
+			length="255" type="java.lang.String" not-null="false"/>
+			
+			<many-to-one name="country" column="shipping_country_id"  cascade="none" lazy="false" fetch="join"
+			class="com.imadp.service.location.country.Country" not-null="false"/>
+			
+			<property name="instructions" column="instructions" 
+			length="10000" type="java.lang.String" not-null="false" />
+			
+		</component>
+			
+		<component name="shippingReceipt" class="com.imadp.service.commerce.order.shipping.ShippingReceipt">
+			
+			<list name="transactions" table="shipping_transactions" cascade="all" lazy="false" fetch="subselect">
+	        	<key column="order_id"/>
+	        	<list-index column="list_index"/>
+	        	<one-to-many class="com.imadp.service.commerce.order.shipping.ShippingTransaction"/>
+	     	</list>	
+	     	
+			<property name="shippingStatus" column="shipping_status" not-null="false"
+			length="255"> 
+				<type name="org.hibernate.type.EnumType"> 
+					<param name="enumClass">com.imadp.service.commerce.order.shipping.ShippingTransaction$ShippingTransactionStatus</param> 
+					<param name="type">12</param> 
+				</type> 				
+			</property> 
+									
+		</component>
+		
+		
+		<!-- References -->
+		<many-to-one name="user" column="user_id"  cascade="none" lazy="false" fetch="join" 
+		class="com.imadp.service.user.User" not-null="false" />
+		
+						 		 		
+    </class>
+</hibernate-mapping>

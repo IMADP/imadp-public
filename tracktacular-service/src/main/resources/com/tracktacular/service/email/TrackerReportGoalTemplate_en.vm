@@ -1,0 +1,89 @@
+<table width="100%" cellpadding="10" style="border: 1px solid #C0C0C0;">
+
+	<tr>
+		<td style="font-size: large; font-weight: bold;" align="left" bgcolor="#C6D5DF">Goals Report</td>
+	</tr>
+	
+	#if(!$trackerReport.enabled)
+		<tr>
+			<td>
+			  	You have no goals.     
+			</td>
+		</tr>
+	#else
+		<tr cellpadding="5">
+			<td align="left" bgcolor="#e3eaf0">
+			   $trackerReport.goalCount #if($trackerReport.goalCount == 1) Goal #else Goals #end
+			</td>
+		</tr>
+		
+		#foreach($goal in $trackerReport.lateGoals)
+	        <tr cellpadding="5">
+				<td align="left" bgcolor="#FFCBCB">
+				 	Goal <i>${goal.name}</i> hasn't been completed!
+				</td>
+			</tr>
+        #end
+       
+		#foreach($objective in $trackerReport.lateObjectives)
+	        <tr cellpadding="5">
+				<td align="left" bgcolor="#FFCBCB">
+				 	Objective <i>${objective.name}</i> hasn't been completed!
+				</td>
+			</tr>
+        #end
+       
+		<tr>
+			<td>
+				#foreach($goal in $trackerReport.goals )
+		 			<a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-goal/goals/goal-$goal.uid">$goal.name</a>
+			  	#end
+			</td>
+		</tr>
+		
+		#if($trackerReport.lateGoalsCount > 0)
+			<tr>
+				<td>
+					<b>
+						$trackerReport.lateGoalsCount Late #if($trackerReport.lateGoalsCount == 1) Goal #else Goals #end
+					</b>
+				</td>
+			</tr>
+			
+			#foreach($goal in $trackerReport.lateGoals)
+	 			<tr>
+					<td>
+						$goal.name <br/>
+						#if($goal.description)<i>$goal.description</i> <br/>#end
+						$dateTool.format('MMM d, yyyy', $goal.targetDate.millis)	
+					</td>
+				</tr>
+			#end
+			
+		#end
+		
+		#if($trackerReport.lateObjectivesCount > 0)
+			<tr>
+				<td>
+					<b>
+						$trackerReport.lateObjectivesCount Late #if($trackerReport.lateObjectivesCount == 1) Objective #else Objectives #end
+					</b>
+				</td>
+			</tr>
+			
+			#foreach($objective in $trackerReport.lateObjectives)
+	 			<tr>
+					<td>
+						$objective.name <br/>
+						$objective.goal.name</i> <br/>
+						$dateTool.format('MMM d, yyyy', $objective.targetDate.millis)	
+					</td>
+				</tr>
+			#end
+			
+		#end
+		
+		
+	#end
+	
+</table>	

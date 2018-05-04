@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  -
+  - Service context
+  -
+  - Defines beans specific to application services.
+  -
+  -->
+  
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.0.xsd
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+       		
+       		
+    <!-- Aspect Configuration -->   		
+	<context:spring-configured />
+	<context:annotation-config/>
+	<aop:aspectj-autoproxy/>
+	
+	
+	<!-- Transaction Configuration -->   		
+	<tx:annotation-driven transaction-manager="transactionManager" mode="aspectj" />
+        
+        
+    <!-- Persistable Dao -->
+	<bean id="persistableDao" abstract="true" parent="coreComponent" 
+	class="com.imadp.dao.hibernate.PersistableDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	
+	<!-- Encryptor -->
+	<bean id="hibernateStringEncryptor" class="org.jasypt.hibernate.encryptor.HibernatePBEStringEncryptor">
+		<property name="encryptor" ref="stringEncryptor" />
+		<property name="registeredName">
+		    <value>${hibernateStringEncryptor.registeredName}</value>
+		</property>
+	</bean>
+		
+  
+ 	<!-- SearchMapping configuration -->
+	<bean id="searchMappingConfiguration" 
+	class="com.imadp.dao.hibernate.criteria.search.SearchMappingConfiguration">
+		<property name="searchMappingEntities">
+			<list>				
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- Hibernate Mapping Resources -->
+    <bean id="mappingResources" class="java.util.LinkedList">
+		<constructor-arg>
+			<list>
+         	   <value>/com/tracktacular/service/context/dao/account/Authority.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/account/Country.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/account/Credentials.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/account/Event.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/account/PersistableEmail.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/account/Preferences.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/account/Subscription.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/account/SubscriptionPlan.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/account/User.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/blog/BlogEntry.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/blog/BlogCategory.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/support/Feedback.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/support/LogEntry.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/support/Metrics.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/birthday/Birthday.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/blood/BloodPressure.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/body/Body.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/book/Book.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/book/Chapter.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/bucket/Item.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/budget/Budget.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/budget/Item.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/budget/ItemCategory.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/calendar/CalendarEntry.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/cholesterol/Cholesterol.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/dream/Dream.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/dream/Dreamsign.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/game/Game.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/gift/Gift.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/goal/Goal.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/goal/Objective.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/exercise/Exercise.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/exercise/Routine.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/exercise/Entry.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/exercise/Workout.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/journal/Journal.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/journal/Entry.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/movie/Movie.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/music/Album.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/music/Song.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/recipe/Recipe.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/recipe/RecipeChapter.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/recipe/RecipeTag.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/restaurant/Restaurant.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/restaurant/Meal.hbm.xml</value>
+           	   <value>/com/tracktacular/service/context/dao/tracker/task/Task.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/task/TaskCategory.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/tv/Show.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/tv/Episode.hbm.xml</value>
+               <value>/com/tracktacular/service/context/dao/tracker/wish/Item.hbm.xml</value>
+            </list>
+		</constructor-arg>
+	</bean>
+		
+		
+	<!-- Hibernate SessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mappingResources" ref="mappingResources" />
+        <property name="hibernateProperties">
+	        <props>
+	     	    <prop key="hibernate.show_sql">${sessionFactory.hibernate.show_sql}</prop> 
+	            <prop key="hibernate.dialect">${sessionFactory.hibernate.dialect}</prop>
+	            <prop key="hibernate.hbm2ddl.auto">${sessionFactory.hibernate.hbm2ddl.auto}</prop>
+	            <prop key="hibernate.bytecode.provider">${sessionFactory.hibernate.bytecode.provider}</prop>
+	            <prop key="hibernate.generate_statistics">${sessionFactory.hibernate.generate_statistics}</prop>
+	            <prop key="hibernate.search.default.directory_provider">${sessionFactory.hibernate.search.default.directory_provider}</prop>
+	            <prop key="hibernate.search.default.indexBase">${sessionFactory.hibernate.search.default.indexBase}</prop> 
+		    </props>
+        </property>
+        <property name="entityInterceptor">
+        	<bean class="com.imadp.dao.hibernate.TimestampInterceptor" />	
+        </property>
+    </bean>
+    
+    
+    <!-- Datasource -->
+    <jee:jndi-lookup id="dataSource" jndi-name="${dataSource.jndi-name}" />
+    
+    
+    <!-- Transaction Manager -->
+	<bean id="transactionManager" 
+	class="org.springframework.orm.hibernate3.HibernateTransactionManager" >
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>	
+	
+	    
+    <!-- Service Component -->		
+	<bean id="serviceComponent" abstract="true" parent="coreComponent" />
+	
+ 	
+	<!-- Authority Service -->
+	<bean id="authorityDao" parent="persistableDao">
+		<property name="entityClass" value="com.imadp.service.account.authority.Authority"/>
+	</bean>
+	
+	<bean id="authorityService" parent="serviceComponent"
+		class="com.imadp.service.account.authority.AuthorityServiceImpl">
+		<property name="dao" ref="authorityDao" />
+		<property name="findByFindCriteriaCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="authorityService.findByFindCriteriaCache" />
+			</bean>
+		</property>
+	</bean>
+	
+	
+	<!-- BlogEntry Service -->	
+	<bean id="blogEntryDao" parent="persistableDao">
+		<property name="entityClass" value="com.imadp.service.blog.BlogEntry"/>
+	</bean>
+	
+	<bean id="blogEntryService" parent="serviceComponent" 
+	class="com.imadp.service.blog.BlogEntryServiceImpl" >
+		<property name="dao" ref="blogEntryDao"/>
+		<property name="getCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="blogEntryService.getCache"/>
+			</bean>
+		</property>		
+	</bean>
+	
+	
+	<!-- BlogCategory Service -->	
+	<bean id="blogCategoryDao" parent="persistableDao">
+		<property name="entityClass" value="com.imadp.service.blog.BlogCategory"/>
+	</bean>
+	
+	<bean id="blogCategoryService" parent="serviceComponent" 
+	class="com.imadp.service.blog.BlogCategoryServiceImpl" >
+		<property name="dao" ref="blogCategoryDao"/>
+		<property name="blogEntryService" ref="blogEntryService"/>		
+		<property name="findByFindCriteriaCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="blogCategoryService.findByFindCriteriaCache"/>
+			</bean>
+		</property>	
+	</bean>
+	
+	
+	<!-- Country Service -->
+	<bean id="countryDao" parent="persistableDao">
+		<property name="entityClass" value="com.imadp.service.location.country.Country"/>
+	</bean>
+	
+	<bean id="countryService" parent="serviceComponent"
+		class="com.imadp.service.location.country.CountryServiceImpl" init-method="init">
+		<property name="dao" ref="countryDao" />
+		<property name="defaultCountryCode">
+			<value>${countryService.defaultCountryCode}</value>
+		</property>
+		<property name="findByFindCriteriaCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="countryService.findByFindCriteriaCache" />
+			</bean>
+		</property>
+	</bean>
+
+	
+	<!-- Credentials Service -->
+	<bean id="credentialsDao" parent="persistableDao">
+		<property name="entityClass" value="com.imadp.service.account.credentials.Credentials"/>
+	</bean>
+	
+	<bean id="credentialsService" parent="serviceComponent" 
+	class="com.imadp.service.account.credentials.CredentialsServiceImpl" >
+		<property name="dao" ref="credentialsDao"/>
+		<property name="restrictedUsernames">
+			<util:set>
+			    <value>private</value>
+			    <value>public</value>
+			    <value>default</value>
+			    <value>demo</value>
+			    <value>user</value>
+			    <value>username</value>
+			    <value>admin</value>
+			    <value>admins</value>
+			    <value>administrator</value>
+			    <value>administrators</value>
+			    <value>tracktacular</value>
+			</util:set>
+		</property>
+	</bean>
+	
+
+	<!-- Event Service -->
+	<bean id="eventDao" parent="persistableDao">
+		<property name="entityClass" value="com.imadp.service.commerce.event.Event"/>
+	</bean>
+	
+	<bean id="eventService" parent="serviceComponent" class="com.imadp.service.commerce.event.EventServiceImpl">
+		<property name="dao" ref="eventDao"/>
+ 	</bean>	
+		
+
+	<!-- Feedback Service -->
+	<bean id="feedbackDao" parent="persistableDao">
+		<property name="entityClass" value="com.imadp.service.feedback.Feedback"/>
+	</bean>
+	
+	<bean id="feedbackService" parent="serviceComponent"
+		class="com.imadp.service.feedback.FeedbackServiceImpl">
+		<property name="dao" ref="feedbackDao" />
+	</bean>
+	
+
+	<!-- Log Entry Service -->
+	<bean id="logEntryDao" parent="persistableDao">
+		<property name="entityClass" value="com.imadp.service.log.LogEntry"/>
+	</bean>
+	
+	<bean id="logEntryAppender" init-method="init" class="com.imadp.service.log.LogEntryAppenderImpl">
+		<property name="level" value="ERROR"/>
+		<property name="logEntryService" ref="logEntryService" />
+	</bean>
+	
+	<bean id="logEntryService" parent="serviceComponent" 
+	class="com.imadp.service.log.LogEntryServiceImpl" >
+		<property name="dao" ref="logEntryDao"/>
+	</bean>
+	
+	
+	<!-- Metric Service -->
+	<bean id="metricsDao" parent="persistableDao">
+		<property name="entityClass" value="com.imadp.service.metrics.Metrics"/>
+	</bean>
+	
+	<bean id="metricsService" parent="serviceComponent" 
+	class="com.imadp.service.metrics.MetricsServiceImpl" >
+		<property name="dao" ref="metricsDao"/>
+		<property name="taskExecutor" ref="metricsTaskExecutor"/>
+	</bean>
+	
+	<bean id="metricsTaskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+    	<property name="corePoolSize" value="1" />
+    	<property name="maxPoolSize" value="5" />
+    	<property name="waitForTasksToCompleteOnShutdown" value="true" />
+	</bean>	
+	
+	<bean id="metricsAspect" parent="coreComponent" class="com.imadp.service.metrics.MetricsAspect" factory-method="aspectOf" >	
+		<property name="metricsService" ref="metricsService"/>
+	</bean>
+	
+		
+	<!-- PersistableEmail Service --> 
+	<bean id="persistableEmailDao" parent="persistableDao">
+		<property name="entityClass" value="com.imadp.service.email.PersistableEmail"/>
+	</bean>
+					
+	<bean id="persistableEmailService" parent="serviceComponent" 
+ 	class="com.imadp.service.email.PersistableEmailServiceSynchronousImpl">
+		<property name="dao" ref="persistableEmailDao"/>
+		<property name="emailSender" ref="emailSender"/>
+		<property name="templateEngine" ref="templateEngine"/>
+ 	</bean>
+ 	
+ 	
+ 	<!-- Subscription Service -->
+	<bean id="subscriptionDao" parent="persistableDao">
+		<property name="entityClass" value="com.imadp.service.commerce.subscription.Subscription"/>
+	</bean>
+	
+	<bean id="subscriptionService" parent="serviceComponent" class="com.imadp.service.commerce.subscription.SubscriptionServiceImpl">
+		<property name="dao" ref="subscriptionDao"/>
+		<property name="findByFindCriteriaCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="subscriptionService.findByFindCriteriaCache"/>
+			</bean>
+		</property>			
+ 	</bean>	
+		
+
+	<!-- Subscription Plan Service -->
+	<bean id="subscriptionPlanDao" parent="persistableDao">
+		<property name="entityClass" value="com.imadp.service.commerce.subscription.plan.SubscriptionPlan"/>
+	</bean>
+	
+	<bean id="subscriptionPlanService" parent="serviceComponent" class="com.imadp.service.commerce.subscription.plan.SubscriptionPlanServiceImpl">
+		<property name="dao" ref="subscriptionPlanDao"/>
+		<property name="findByFindCriteriaCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="subscriptionPlanService.findByFindCriteriaCache"/>
+			</bean>
+		</property>			
+ 	</bean>	
+		
+
+	<!-- User Service -->
+	<bean id="userDao" parent="persistableDao">
+		<property name="entityClass" value="com.imadp.service.user.User"/>
+	</bean>
+	
+	<bean id="userService" parent="serviceComponent" class="com.imadp.service.user.UserServiceImpl">
+		<property name="dao" ref="userDao"/>
+		<property name="getCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="userService.getCache"/>
+			</bean>
+		</property>			
+ 	</bean>	
+		
+
+	<!-- 
+	
+		Authentication
+	
+	
+	 -->
+	
+	
+	<!-- Authentication Manager -->
+	<bean id="authenticationManager"
+		class="org.springframework.security.authentication.ProviderManager">
+		<property name="providers">
+			<list>
+				<ref bean="daoAuthenticationProvider" />
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- Authentication Providers -->
+	<bean id="daoAuthenticationProvider"
+		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<property name="userDetailsService" ref="credentialsService" />
+		<property name="passwordEncoder" ref="passwordEncoder" />
+	</bean>
+	 
+	
+</beans>

@@ -1,0 +1,106 @@
+<project 
+	xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.imadp</groupId>
+		<artifactId>imadp</artifactId>
+		<version>1.0</version>
+		<relativePath>../imadp/pom.xml</relativePath>
+	</parent>
+
+	<artifactId>imadp-web-stripes</artifactId>
+	<packaging>jar</packaging>
+
+	<dependencies>
+	
+	
+		<!-- 
+		
+			IMADP
+			
+		-->
+		<dependency>
+			<groupId>com.imadp</groupId>
+			<artifactId>imadp-web</artifactId>
+			<version>1.0</version>
+		</dependency>		
+		<dependency>
+			<groupId>com.imadp</groupId>
+			<artifactId>imadp-service</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		
+		<!-- 
+		
+			Stripes
+			
+		-->
+		<dependency>
+			<groupId>net.sourceforge.stripes</groupId>
+			<artifactId>stripes</artifactId>
+			<version>1.5.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.stripesstuff</groupId>
+			<artifactId>stripesstuff</artifactId>
+			<version>0.2</version>
+		</dependency>
+		
+		
+		<!-- 
+		
+			Jstl
+		
+		 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
+		
+		<!-- 
+		
+			JSON taglib
+		
+		 -->
+		<dependency>
+			<groupId>json-taglib</groupId>
+			<artifactId>json-taglib</artifactId>
+			<version>0.4.1</version>
+		</dependency>
+		
+		
+		<!-- 
+		
+			Optional Javax Servlet
+		
+		 -->		
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.2.1</version>
+			<optional>true</optional>
+		</dependency>
+		
+		
+		<!-- 
+		
+			Optional Javax El
+		
+		 -->		
+		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>javax.el-api</artifactId>
+			<version>2.2.1</version>			
+			<optional>true</optional>
+		</dependency>
+	
+	</dependencies>
+	
+</project>

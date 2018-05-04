@@ -1,0 +1,29 @@
+<table width="100%" cellpadding="10" style="border: 1px solid #C0C0C0;">
+
+	<tr>
+		<td style="font-size: large; font-weight: bold;" align="left" bgcolor="#C6D5DF">Recipes Report</td>
+	</tr>
+	
+	#if(!$trackerReport.enabled)
+		<tr>
+			<td>
+			   You have no recipes.    
+			</td>
+		</tr>
+	#else
+		<tr cellpadding="5">
+			<td align="left" bgcolor="#e3eaf0">
+			   $trackerReport.recipeBook.recipeCount #if($trackerReport.recipeBook.recipeCount == 1) Recipe #else Recipes #end
+			    in $trackerReport.recipeBook.chapterCount #if($trackerReport.recipeBook.chapterCount == 1) Chapter #else Chapters #end
+			</td>
+		</tr>
+		<tr>
+			<td>
+				#foreach($chapter in $trackerReport.recipeBook.chapters )
+		 			<a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-recipe/recipe-book/chapter-$chapter.uid">$chapter.title</a>
+			  	#end
+			</td>
+		</tr>
+	#end
+	
+</table>	

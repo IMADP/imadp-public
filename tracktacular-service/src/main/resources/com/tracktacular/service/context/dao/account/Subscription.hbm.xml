@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.imadp.service.commerce.subscription.Subscription" table="account_subscriptions">
+	
+		<!-- Id -->
+    	<id name="id" column="id" type="long" unsaved-value="null">
+			<generator class="identity"/>
+		</id>
+		
+		
+		<!-- Version -->
+		<version name="version" column="version" unsaved-value="undefined" />
+		
+		
+		<!-- Global Properties -->
+		<property name="uid" column="uid" 
+		type="java.lang.String" length="36" unique="true" not-null="true" />
+		
+		<property name="timeCreated" column="time_created" 
+		type="long"	not-null="true" />
+		
+		<property name="timeModified" column="time_modified" 
+		type="long"	not-null="true" />
+		
+		<property name="persistableStateDate" column="persistable_state_date" 
+		type="org.joda.time.contrib.hibernate.PersistentDateTime" not-null="false" />
+		
+		<property name="persistableState" column="persistable_state" access="field"
+		length="10" not-null="false"> 
+			<type name="org.hibernate.type.EnumType"> 
+				<param name="enumClass">com.imadp.dao.PersistableState</param> 
+				<param name="type">12</param> 
+			</type> 
+		</property> 
+		
+		
+		<!-- Properties -->
+		<property name="customerId" column="customer_id" 
+		length="255" type="java.lang.String" not-null="false" />
+		
+		<property name="subscriptionStart" column="subscription_start" 
+		type="org.joda.time.contrib.hibernate.PersistentDateTime" not-null="false" />
+		
+		<property name="subscriptionEnd" column="subscription_end" 
+		type="org.joda.time.contrib.hibernate.PersistentDateTime" not-null="false" />
+		
+		<property name="subscriptionPeriodStart" column="subscription_period_start" 
+		type="org.joda.time.contrib.hibernate.PersistentDateTime" not-null="false" />
+		
+		<property name="subscriptionPeriodEnd" column="subscription_period_end" 
+		type="org.joda.time.contrib.hibernate.PersistentDateTime" not-null="false" />
+		
+		<property name="subscriptionLogJson" column="subscription_log_json" 
+		length="25000" type="java.lang.String" not-null="false" />
+		
+		<property name="subscriptionStatus" column="subscription_status" access="field"
+		length="255" not-null="false"> 
+			<type name="org.hibernate.type.EnumType"> 
+				<param name="enumClass">com.imadp.service.commerce.subscription.SubscriptionStatus</param> 
+				<param name="type">12</param> 
+			</type> 
+		</property> 
+		
+			
+		<!-- References -->
+		<many-to-one name="subscriptionPlan" column="subscription_plan" cascade="none" lazy="false" fetch="join" 
+		class="com.imadp.service.commerce.subscription.plan.SubscriptionPlan" not-null="false" />
+		
+		<many-to-one name="referrer" column="referrer_id" 
+		cascade="none" lazy="false" fetch="join" class="com.imadp.service.user.User" not-null="false" />
+		
+		<many-to-one name="user" column="user_id" 
+		cascade="none" lazy="false" fetch="join" class="com.imadp.service.user.User" not-null="true" />
+					 	
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+#set($subject = "Verify your Tracktacular account")
+#set($from = "webmaster@tracktacular.com")
+#set($fromAlias = "Tracktacular")
+
+#parse("AbstractEmailHeader_en.vm")
+
+	#set($title = "Welcome to Tracktacular!" )
+	
+	#contentStart($title)
+	
+		Hello ${credentials.username}, your account is almost set up. Please verify your email address by clicking the following link:
+		
+		<a href="https://www.tracktacular.com/verify-email/${credentials.verificationId}">
+			Verify Email
+		</a>
+						
+	#contentEnd
+
+#parse("AbstractEmailFooter_en.vm")

@@ -1,0 +1,37 @@
+<table width="100%" cellpadding="10" style="border: 1px solid #C0C0C0;">
+
+	<tr>
+		<td style="font-size: large; font-weight: bold;" align="left" bgcolor="#C6D5DF">Exercise Report</td>
+	</tr>
+	
+	#if(!$trackerReport.enabled)
+		<tr>
+			<td>
+			   You have no exercise routines.     
+			</td>
+		</tr>
+	#else
+	
+		#foreach($routine in $trackerReport.lateRoutines)
+	        <tr cellpadding="5">
+				<td align="left" bgcolor="#FFCBCB">
+				 	Routine <i>${routine.name}</i> is being neglected!
+				</td>
+			</tr>
+        #end
+		
+		<tr cellpadding="5">
+			<td align="left" bgcolor="#e3eaf0">
+			   $trackerReport.routineCount Exercise #if($trackerReport.routineCount == 1) Routine #else Routines #end
+			</td>
+		</tr>
+		<tr>
+			<td>
+				#foreach($routineDto in $trackerReport.routines )
+		 			<a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-exercise/routine-$routineDto.routine.uid/$routineDto.routine.nameSlug/page-1">$routineDto.routine.name</a>
+			  	#end
+			</td>
+		</tr>  
+	#end
+	
+</table>	

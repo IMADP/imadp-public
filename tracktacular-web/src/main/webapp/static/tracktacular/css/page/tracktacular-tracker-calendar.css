@@ -1,0 +1,72 @@
+.calendar-month {
+	margin:25px 25px 50px 25px;
+	border: 1px solid #E6E6E6;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: 2px 2px 3px #A6A6A6;
+	-webkit-box-shadow: 2px 2px 2px #A6A6A6;
+	box-shadow: 2px 2px 2px #A6A6A6;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#A6A6A6')";
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#A6A6A6');
+}
+
+.calendar-day-header {
+	background-color: #F1F5F8;
+	color: #6D869F;
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: bold;
+	padding:2px 5px 0px 5px;
+}
+
+.current-day {
+	background-color: #DFF49D;
+}
+
+.inactive-month {
+	background-color: #FFE8F3;
+}
+
+.calendar-item {
+	color: #3F4040;
+	line-height: 12px;
+	font-size: 10px;
+	text-align:center;
+	padding-bottom:5px;
+	padding-top:5px;
+}
+
+.calendar-item-even {
+	background-color: #E4F5FA;
+}
+
+.calendar-item-odd {
+	background-color: #FFF2E6;
+}
+
+.calendar-month td {
+	width: 95px;
+	height: 95px;
+	vertical-align: top;
+	border: 1px solid #E0E0E0;
+}
+
+.calendar-month th {
+	background-color: #E4ECF1;
+	color: #3E576F;
+	font-size: 13px;
+	line-height: 13px;
+	padding:10px;
+}
+
+.calendar-month td.calendar-month-row {
+	height: auto;
+	border-top: 0;
+	border-bottom: 0;
+}
+
+.calendar-month td div.calendar-month-row-content {
+	display:none;
+}

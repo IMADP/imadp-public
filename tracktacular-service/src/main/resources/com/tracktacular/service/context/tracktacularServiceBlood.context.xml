@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+  -
+  - Service context
+  -
+  - Defines beans specific to application services.
+  -
+  -->
+  
+<beans>
+
+
+	<!-- BloodPressure Service -->	
+	<bean id="blood_bloodPressureDao" parent="persistableDao">
+		<property name="entityClass" value="com.tracktacular.service.tracker.blood.BloodPressure"/>
+	</bean>
+	
+	<bean id="blood_bloodPressureService" parent="serviceComponent" 
+	class="com.tracktacular.service.tracker.blood.BloodPressureServiceImpl" >
+		<property name="dao" ref="blood_bloodPressureDao"/>
+		<property name="findByUserFindCriteriaCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="blood_bloodPressureService.findByUserFindCriteriaCache"/>
+			</bean>
+		</property>	
+		<property name="findCountByUserFindCriteriaCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="blood_bloodPressureService.findCountByUserFindCriteriaCache"/>
+			</bean>
+		</property>	
+	</bean>
+	
+			
+	<!-- 
+	
+		Facade
+	
+	 -->
+	 
+	 
+	<bean id="bloodTrackerFacade" parent="coreComponent" 
+	class="com.tracktacular.service.tracker.blood.BloodTrackerFacadeImpl" >
+		<property name="bloodPressureService" ref="blood_bloodPressureService"/>
+	</bean>
+				
+		
+</beans>

@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /account/
+Disallow: /subscribe/
+Disallow: /unsubscribe/
+Disallow: /static/
+Disallow: /feedback/
+Disallow: /error/
+Disallow: /page-not-found
+Disallow: /user-demo/tracktacular-report
+Sitemap: https://www.tracktacular.com/sitemap.xml

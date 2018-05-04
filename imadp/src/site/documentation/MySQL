@@ -1,0 +1,9 @@
+  =================================================================================================
+  
+   MySQL Notes                     
+   
+  =================================================================================================
+ 
+	o The Datetime field
+		- Keep in mind this field truncates all milliseconds
+		- If more precision is needed, use a long to store the datetime

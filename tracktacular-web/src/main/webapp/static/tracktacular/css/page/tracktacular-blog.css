@@ -1,0 +1,125 @@
+div.blog {
+	margin: 40px 60px; 
+	font-size: 16px;
+	line-height: 24px;
+	color: #54545A;
+}
+
+div.disqus {
+	margin: 40px 60px -20px 60px
+}
+
+div.blog h2, div.blog h3 {
+	margin: 0; 
+	display: inline-block;
+}
+
+div.blog h3 {
+	padding: 20px 0 0 0;
+}
+ 
+div.blog div.post-content {
+	margin-top: 35px; 
+	margin-bottom: 50px;
+} 
+ 
+div.blog div.post-content div.left {
+	 width: 330px;
+} 
+
+div.blog div.post-content div.left img {
+	margin-bottom: 15px;
+} 
+ 
+div.blog div.post-content div.right {
+	width: 315px; 
+	margin-top:20px; 
+	margin-right: 15px;
+} 
+
+div.blog div.post-content div.right div.social {
+	margin: 0 auto !important; 
+	width:220px;
+} 
+		
+div.blog div.post-content div.right div.subscribe {
+	margin: 0 auto !important; 
+	width:280px;
+	text-align:center;
+	font-size: 14px;
+} 
+		
+div.blog h4 {
+	margin-left: 2px;
+	line-height:18px;
+	color: #8C8C8D;
+}
+
+div.blog nav {
+	font-size: 12px;
+	border: 1px solid #D6E1EC; 
+	padding:15px 20px; 
+	background: #F7F7FA; 
+	border-radius: 5px; 
+	box-shadow: 2px 2px 2px #BEC7CF; 
+	-moz-border-radius: 5px; 
+	-moz-box-shadow: 2px 2px 3px #BEC7CF; 
+	-webkit-border-radius: 5px; 
+	-webkit-box-shadow: 2px 2px 2px #BEC7CF; 
+	-khtml-border-radius: 5px; 
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#BEC7CF')"; 
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#BEC7CF');
+}
+
+div.blog nav.top {
+	margin: 0 -15px 25px 25px !important;
+	float:right;
+	width: 175px;
+}
+
+div.blog nav.bottom {
+	margin: 9px auto 12px auto !important;
+	width:250px;
+}
+div.blog nav.bottom  ul.recent-links {
+	margin: 0;
+}
+
+div.blog nav header {
+	font-weight: bold;
+}
+
+div.blog nav header.center {
+	margin-top: -10px;
+	margin-bottom: 10px;
+}
+
+div.blog nav header span, div.blog nav header a.icon-s {
+	margin-bottom:-3px;
+	font-weight:normal;
+}
+
+div.blog nav ul {
+	margin-left: 23px;
+	margin-bottom:10px;
+	line-height: 18px;
+}
+
+div.blog nav.top ul li{
+	list-style: disc outside none
+}
+
+div.blog nav ul li a span {
+	margin-bottom: -4px; 
+	margin-left: -21px; 
+	margin-right: 3px;
+}
+
+div.blog nav ul li a {
+	color: #291EAA !important;
+}
+
+div.blog nav ul li a.active {
+	color: #DB32A5 !important;
+	text-decoration: none !important;
+}

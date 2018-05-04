@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+  -
+  - Service context
+  -
+  - Defines beans specific to application services.
+  -
+  -->
+  
+<beans>
+	
+	
+	<!-- Task Service -->	
+	<bean id="task_taskDao" parent="persistableDao"
+		class="com.tracktacular.service.tracker.task.TaskDaoImpl">
+		<property name="entityClass" value="com.tracktacular.service.tracker.task.Task"/>
+	</bean>
+	
+	<bean id="task_taskService" parent="serviceComponent" 
+	class="com.tracktacular.service.tracker.task.TaskServiceImpl" >
+		<property name="taskDao" ref="task_taskDao"/>
+		<property name="getTaskReportCompletedCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="task_taskService.getTaskReportCompletedCache"/>
+			</bean>
+		</property>		
+		<property name="findByUserFindCriteriaCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="task_taskService.findByUserFindCriteriaCache"/>
+			</bean>
+		</property>	
+		<property name="findCountByUserFindCriteriaCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="task_taskService.findCountByUserFindCriteriaCache"/>
+			</bean>
+		</property>			
+	</bean>
+	
+	
+	<!-- TaskCategory Service -->	
+	<bean id="task_taskCategoryDao" parent="persistableDao">
+		<property name="entityClass" value="com.tracktacular.service.tracker.task.TaskCategory"/>
+	</bean>
+	
+	<bean id="task_taskCategoryService" parent="serviceComponent" 
+	class="com.tracktacular.service.tracker.task.TaskCategoryServiceImpl" >
+		<property name="dao" ref="task_taskCategoryDao"/>
+		<property name="taskService" ref="task_taskService"/>		
+		<property name="findByUserFindCriteriaCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="task_taskCategoryService.findByUserFindCriteriaCache"/>
+			</bean>
+		</property>	
+	</bean>
+	
+	
+	<!-- 
+	
+		Facade
+	
+	 -->
+	 
+	 
+	<bean id="taskTrackerFacade" parent="coreComponent" 
+	class="com.tracktacular.service.tracker.task.TaskTrackerFacadeImpl" >
+		<property name="taskCategoryService" ref="task_taskCategoryService"/>
+		<property name="taskService" ref="task_taskService"/>
+	</bean>
+	
+	
+</beans>

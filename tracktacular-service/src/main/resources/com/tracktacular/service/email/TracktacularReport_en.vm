@@ -1,0 +1,35 @@
+#set($subject = "Tracktacular Report for $dateTool.format('MMMM d, yyyy', $tracktacularReport.date.millis): #if($tracktacularReport.alerts) $tracktacularReport.alertCount #if($tracktacularReport.alertCount == 1) Alert#else Alerts#end ($tracktacularReport.trackerAlertsBreakdown) #end ")
+#set($from = "webmaster@tracktacular.com")
+#set($fromAlias = "Tracktacular")	
+
+#parse("AbstractEmailHeader_en.vm")
+
+	#set($title = "" )
+	
+	#contentStart($title)
+	
+		<center>
+			<h2><a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracktacular-report">Tracktacular Report</a></h2>
+			<h3>$dateTool.format('MMMM d, yyyy', $tracktacularReport.date.millis)</h3>
+	 	</center>
+	 	
+	 	<br/>
+		
+	 	#foreach($trackerReport in $tracktacularReport.trackerReports )
+	 		#if($trackerReport.alerts)
+		        #set($trackerReportTemplate = "TrackerReport" + $trackerReport.tracker.capitalizedName + "Template_en.vm" )
+   				#parse($trackerReportTemplate)
+	        #end
+		#end
+		
+		<br/>
+		<br/>
+		<br/>
+		
+		<i>
+			Click here to <a href="https://www.tracktacular.com/unsubscribe-email-alerts/${preferences.uid}">unsubscribe</a> from future Tracktacular Report notifications.
+		</i>
+						
+	#contentEnd
+
+#parse("AbstractEmailFooter_en.vm")

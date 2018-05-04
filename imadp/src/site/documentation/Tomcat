@@ -1,0 +1,32 @@
+  =================================================================================================
+  
+   Tomcat Notes                     
+   
+  =================================================================================================
+ 
+	o CATALINA_OPTS vs JAVA_OPTS
+		- Catalina options are preferrable since they refer specifically to the tomcat instance, and not
+      	  all Java applications.
+      
+	o Text Editor
+		- Use an editor like Notepad++ when editing Unix file types, as Windows will not save them correctly.    
+         
+	o VM Arguments
+		- To add VM arguments to Tomcat through Eclipse:
+		- Double click on the server instance
+		- Open Launch Configuration
+		- Arguments tab
+    	
+	o System Properties
+		- Use -D to specify system properties, ie: -Dorg.apache.catalina.session.StandardSession.ACTIVITY_CHECK=true
+
+	o Useful Parameters
+		+HeapDumpOnOutOfMemoryError (Force a heap dump on an OutOfMemoryException)
+		-XX:HeapDumpPath="some/path" (Heap dump location - consider using $CATALINA_HOME in the path)
+		-Xms8m (Initial heap size)
+		-Xmx128m (Maximum heap size)
+		-XX:-UseGCOverheadLimit (Disables GC overhead exception)
+		-Dcom.sun.management.jmxremote (JXM enabled memory - required for Lamba Probe)
+  	
+	o PersistentManager
+		- Consider using the PersistentManager to store inactive sessions in the database rather than memory	

@@ -1,0 +1,2 @@
+	<input id="{object}" class="time-picker" name="{object}String" value="{@getProperty object=object suffix="String"}{/getProperty}" type="text" maxlength="18" />		
+	<div id="{object}-error" class="none error"></div> 

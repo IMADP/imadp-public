@@ -1,0 +1,26 @@
+package com.tracktacular.service.tracker.tv;
+
+import com.tracktacular.service.tracker.AbstractTrackerPreferences;
+
+
+/**
+ * TvTrackerPreferences
+ *
+ * Tracker preferences for a Tracktacular user.
+ *
+ * @version 1.0
+ * @author Anthony DePalma
+ */
+public class TvTrackerPreferences extends AbstractTrackerPreferences {
+	private boolean alertOnTargetDates = true;
+
+	// getters and setters
+	public boolean isAlertOnTargetDates() {
+		return alertOnTargetDates;
+	}
+
+	public void setAlertOnTargetDates(boolean alertOnTargetDates) {
+		this.alertOnTargetDates = alertOnTargetDates;
+	}
+
+}

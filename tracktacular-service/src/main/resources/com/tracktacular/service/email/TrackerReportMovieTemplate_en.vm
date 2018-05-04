@@ -1,0 +1,57 @@
+<table width="100%" cellpadding="10" style="border: 1px solid #C0C0C0;">
+
+	<tr>
+		<td style="font-size: large; font-weight: bold;" align="left" bgcolor="#C6D5DF">Movies Report</td>
+	</tr>
+	
+	#if(!$trackerReport.enabled)
+		<tr>
+			<td>
+			  You have no movies in your library.     
+			</td>
+		</tr>
+	#else
+		<tr cellpadding="5">
+			<td align="left" bgcolor="#e3eaf0">
+			   $trackerReport.movieCount #if($trackerReport.movieCount == 1) Movie #else Movies #end in your Library
+			</td>
+		</tr>
+		
+		#foreach($movie in $trackerReport.targetDateMovies)
+	        <tr cellpadding="5">
+				<td align="left" bgcolor="#FFCBCB">
+				 	The target date for movie <i>${movie.title}</i> is today!
+				</td>
+			</tr>
+        #end
+		
+		<tr>
+			<td>
+			    <a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-movie/movies/by-title">By Title</a>
+				<a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-movie/movies/by-tag">By Tag</a>
+				<a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-movie/movies/by-rating">By Rating</a>  
+			</td>
+		</tr>
+		
+		#if($trackerReport.unratedMovieCount > 0)
+			<tr>
+				<td>
+					<b>
+						$trackerReport.unratedMovieCount Unrated #if($trackerReport.unratedMovieCount == 1) Movie #else Movies #end
+					</b>
+				</td>
+			</tr>
+			
+			#foreach($movie in $trackerReport.unratedMovies )
+	 			<tr>
+					<td>
+						$movie.title <br/>
+						#if($movie.tag)<i>$movie.tag</i>#end
+					</td>
+				</tr>
+			#end
+			
+		#end
+	#end
+	
+</table>	

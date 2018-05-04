@@ -1,0 +1,65 @@
+  =================================================================================================
+  
+   IMADPCore
+   
+  =================================================================================================
+ 
+    This is the highlest level component in which all other projects can refer to. In general it
+    provides utilities that are the most reusable across all other projects, such as unit testing
+    enhancements, string and other high level utilities, as well as the base class CoreComponent
+    for all extended components.
+  
+  =================================================================================================
+  
+   Cache
+   
+  =================================================================================================
+ 
+    This components provides a general cache and cache manager facade in the form of ICache
+    and ICacheManager. Two implementations are provided, a simple ConcurrentHashMap and the
+    popular open source cache solution EhCache.
+    
+  =================================================================================================
+  
+   Email
+   
+  =================================================================================================
+ 
+    This component provides a simple email sender facade in the form of IEmailSender. A JavaMail
+    implementation is provided as well as successful and unsuccesful mock implementations, which
+    are extremely useful for unit testing.
+     
+  =================================================================================================
+  
+   Encryption
+   
+  =================================================================================================
+ 
+    This component provides bi-directional encryption and decryption through the IEncryptor 
+    interface. An implementation is provided using Jasypt. EncryptionExceptions and 
+    DecryptionExceptions are thrown in the event that an object cannot be encrypted or decrypted. 
+    
+    
+  =================================================================================================
+  
+   Random
+   
+  =================================================================================================
+ 
+    This component provides a simple facade for the generation of random numbers in the form of 
+    the IRandomGenerator interface. It provides two implementations, a NumericalRecipies generator
+    for fast, high quality number generation, and a SecureRandom for cryptographically secure
+    number generation.
+    
+  =================================================================================================
+  
+   Template
+   
+  =================================================================================================
+ 
+    This component provides templating through the ITemplateEngine interface. The template engine
+    merges model values into localized templates, which are often used for email generation, but
+    could also be used as a translation engine. The template engine provides a TemplateDocument
+    which may contain bulk text as well as custom template properties. A TemplateException is
+    thrown in the event that an error occurred building a TemplateDocument. An implementation is 
+    provided using the velocity engine.

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+  -
+  - Service context
+  -
+  - Defines beans specific to application services.
+  -
+  -->
+  
+<beans>
+
+
+	<!-- CalendarEntry Service -->	
+	<bean id="calendar_calendarEntryDao" parent="persistableDao"
+		class="com.tracktacular.service.tracker.calendar.CalendarEntryDaoImpl">		
+		<property name="entityClass" value="com.tracktacular.service.tracker.calendar.CalendarEntry"/>
+	</bean>
+	
+	<bean id="calendar_calendarEntryService" parent="serviceComponent" 
+	class="com.tracktacular.service.tracker.calendar.CalendarEntryServiceImpl" >
+		<property name="calendarEntryDao" ref="calendar_calendarEntryDao"/>
+		<property name="findWithinIntervalCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="calendar_calendarEntryService.findWithinIntervalCache"/>
+			</bean>
+		</property>		
+		<property name="findByUserFindCriteriaCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="calendar_calendarEntryService.findByUserFindCriteriaCache"/>
+			</bean>
+		</property>		
+		<property name="findCountByUserFindCriteriaCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="calendar_calendarEntryService.findCountByUserFindCriteriaCache"/>
+			</bean>
+		</property>
+	</bean>	
+	
+	
+	<!-- 
+	
+		Facade
+	
+	 -->
+	<bean id="calendarTrackerFacade" parent="coreComponent" 
+	class="com.tracktacular.service.tracker.calendar.CalendarTrackerFacadeImpl" >
+		<property name="calendarEntryService" ref="calendar_calendarEntryService"/>
+		<property name="accountFacade" ref="accountFacade" />
+		<property name="trackersFacade" ref="trackersFacade" />
+	</bean>
+		
+		
+</beans>

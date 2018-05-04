@@ -1,0 +1,68 @@
+<table width="100%" cellpadding="10" style="border: 1px solid #C0C0C0;">
+
+	<tr>
+		<td style="font-size: large; font-weight: bold;" align="left" bgcolor="#C6D5DF">Restaurants Report</td>
+	</tr>
+	
+	#if(!$trackerReport.enabled)
+		<tr>
+			<td>
+			   You have no restaurants in your library.     
+			</td>
+		</tr>
+	#else
+		<tr cellpadding="5">
+			<td align="left" bgcolor="#e3eaf0">
+			   $trackerReport.restaurantCount #if($trackerReport.restaurantCount == 1) Restaurant #else Restaurants #end in your Library
+			</td>
+		</tr>
+		
+		#foreach($restaurant in $trackerReport.targetDateRestaurants)
+	        <tr cellpadding="5">
+				<td align="left" bgcolor="#FFCBCB">
+				 	The target date for restaurant <i>${restaurant.name}</i> is today!
+				</td>
+			</tr>
+        #end
+		
+		#foreach($meal in $trackerReport.targetDateMeals)
+	        <tr cellpadding="5">
+				<td align="left" bgcolor="#FFCBCB">
+				 	The target date for meal <i>${meal.name}</i> is today!
+				</td>
+			</tr>
+        #end
+		
+		<tr>
+			<td>
+			    <a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-restaurant/restaurants/by-name">By Name</a>
+			    <a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-restaurant/restaurants/by-city">By City</a>
+			    <a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-restaurant/restaurants/by-state">By State</a>
+				<a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-restaurant/restaurants/by-tag">By Tag</a>
+				<a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-restaurant/restaurants/by-rating">By Rating</a>  
+			</td>
+		</tr>
+		
+		#if($trackerReport.unratedRestaurantCount > 0)
+			<tr>
+				<td>
+					<b>
+						$trackerReport.unratedRestaurantCount Unrated #if($trackerReport.unratedRestaurantCount == 1) Restaurant #else Restaurants #end
+					</b>
+				</td>
+			</tr>
+			
+			#foreach($restaurant in $trackerReport.unratedRestaurants )
+	 			<tr>
+					<td>
+						$restaurant.name <br/>
+						<i>$restaurant.city, $restaurant.state</i> <br/>
+						#if($restaurant.tag)<span style="font-size: small">$restaurant.tag</span>#end
+					</td>
+				</tr>
+			#end
+			
+		#end
+	#end
+	
+</table>	

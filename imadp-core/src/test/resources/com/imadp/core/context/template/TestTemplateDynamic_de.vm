@@ -1,0 +1,3 @@
+#set($subject = "Subject_de: ${subject}")
+#set($from = "From_de: ${from}")
+SampleContent_de: ${content}

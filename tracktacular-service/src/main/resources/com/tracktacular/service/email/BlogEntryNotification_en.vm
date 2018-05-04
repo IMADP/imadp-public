@@ -1,0 +1,33 @@
+#set($subject = "New Blog Entry: ${blogEntry.title}")
+#set($from = "webmaster@tracktacular.com")
+#set($fromAlias = "Tracktacular")
+
+#parse("AbstractEmailHeader_en.vm")
+
+	#set($title = "New Blog Entry" )
+	
+	#contentStart($title)
+	
+		<b>${blogEntry.title}</b>
+	
+	    <br/>
+		<br/>
+		
+		${blogEntry.description}
+	
+		<br />
+		<br />
+		
+		<a href="https://www.tracktacular.com/blog/${blogEntry.eid}/${blogEntry.titleSlug}">Click here to read the article.</a>
+		
+		<br/>
+		<br/>
+		<br/>
+		
+		<i>
+			Click here to <a href="https://www.tracktacular.com/unsubscribe-blog-notification/${preferences.uid}">unsubscribe</a> from future blog entry notifications.
+		</i>
+						
+	#contentEnd
+
+#parse("AbstractEmailFooter_en.vm")

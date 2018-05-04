@@ -1,0 +1,37 @@
+
+/*
+ * Header
+ *
+ */ 
+ 
+#header {
+	overflow:hidden;
+	padding:13px 0 22px 13px;
+}
+
+#header .logo {
+	float:left;
+	background:url(/static/tracktacular/img/page/logo.gif) no-repeat;
+	width:332px;
+	height:95px;
+	text-indent:-9999px;
+	overflow:hidden;
+}
+
+#header .logo a {
+	display:block;
+	height:100%;
+}
+
+#header .user-profile {
+	float:right;
+	padding: 12px 0 0 0;
+}
+
+#header .header-info {
+	text-align:center; 
+	font-size:12px; 
+	line-height:21px;
+	padding-top:9px; 
+	width: 320px;
+}

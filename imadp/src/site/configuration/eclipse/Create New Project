@@ -1,0 +1,9 @@
+  =================================================================================================
+  
+   Create New Project                           
+   
+  =================================================================================================
+ 
+ 	- Choose Maven > Maven Project
+    - Use the archetype: maven-archetype-quickstart
+    - Use the SamplePom.xml as a pom reference

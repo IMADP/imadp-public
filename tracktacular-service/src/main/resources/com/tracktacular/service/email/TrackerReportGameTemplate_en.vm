@@ -1,0 +1,60 @@
+<table width="100%" cellpadding="10" style="border: 1px solid #C0C0C0;">
+
+	<tr>
+		<td style="font-size: large; font-weight: bold;" align="left" bgcolor="#C6D5DF">Games Report</td>
+	</tr>
+	
+	#if(!$trackerReport.enabled)
+		<tr>
+			<td>
+			   You have no games in your library.     
+			</td>
+		</tr>
+	#else
+		<tr cellpadding="5">
+			<td align="left" bgcolor="#e3eaf0">
+			   $trackerReport.gameCount #if($trackerReport.gameCount == 1) Game #else Games #end in your Library
+			</td>
+		</tr>
+		
+		#foreach($game in $trackerReport.targetDateGames)
+	        <tr cellpadding="5">
+				<td align="left" bgcolor="#FFCBCB">
+				 	The target date for game <i>${game.title}</i> is today!
+				</td>
+			</tr>
+        #end
+		
+		<tr>
+			<td>
+				<a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-game/games/by-title">By Title</a>
+				<a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-game/games/by-platform">By Platform</a>
+				<a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-game/games/by-tag">By Tag</a>
+				<a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-game/games/by-rating">By Rating</a>
+			</td>
+		</tr>
+		
+		#if($trackerReport.unratedGameCount > 0)
+			<tr>
+				<td>
+					<b>
+						$trackerReport.unratedGameCount Unrated #if($trackerReport.unratedGameCount == 1) Game #else Games #end
+					</b>
+				</td>
+			</tr>
+			
+			#foreach($game in $trackerReport.unratedGames )
+	 			<tr>
+					<td>
+						$game.title <br/>
+						<i>$game.platform</i> <br/>
+						#if($game.tag)<span style="font-size: small">$game.tag</span>#end 
+					</td>
+				</tr>
+			#end
+			
+		#end
+		
+	#end
+	
+</table>	

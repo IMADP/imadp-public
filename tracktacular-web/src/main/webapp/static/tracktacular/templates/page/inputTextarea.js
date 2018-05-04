@@ -1,0 +1,2 @@
+	<textarea id="{object}" name="{object}" maxlength="{max}" rows="{?rows}{rows}{:else}5{/rows}">{@getProperty object=object}{/getProperty}</textarea>	
+	<div id="{object}-error" class="none error"></div> 

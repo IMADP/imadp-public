@@ -1,0 +1,18 @@
+#set($subject = "Subscription Error: [${subscriptionException.message}]")
+#set($from = "webmaster@tracktacular.com")
+#set($fromAlias = "Tracktacular")
+
+#parse("AbstractEmailHeader_en.vm")
+
+	#set($title = "Subscription Error" )
+	
+	#contentStart($title)
+	
+		<strong>Error:</strong> ${subscriptionException} <br/><br/>
+	 	<strong>User:</strong> ${subscriptionException.user.uid} <br/><br/>
+	 	<strong>Subscription:</strong> ${subscriptionException.subscription.uid} <br/><br/>
+	 	<strong>Event:</strong> ${subscriptionException.eventId} <br/><br/>
+						
+	#contentEnd
+
+#parse("AbstractEmailFooter_en.vm")

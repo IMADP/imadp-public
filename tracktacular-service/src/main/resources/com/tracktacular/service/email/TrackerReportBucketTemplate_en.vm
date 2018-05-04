@@ -1,0 +1,38 @@
+<table width="100%" cellpadding="10" style="border: 1px solid #C0C0C0;">
+
+	<tr>
+		<td style="font-size: large; font-weight: bold;" align="left" bgcolor="#C6D5DF">Bucket List Report</td>
+	</tr>
+	
+	#if(!$trackerReport.enabled)
+		<tr>
+			<td>
+			   You have no items on your Bucket List.
+			</td>
+		</tr>
+	#else
+		<tr cellpadding="5">
+			<td align="left" bgcolor="#e3eaf0">
+			   $trackerReport.items.finishedItemCount out of $trackerReport.items.itemCount Completed Items on your Bucket List	
+			</td>
+		</tr>
+		<tr>
+			<td>
+			
+				<table width="60%">
+					<tr>
+						<td bgcolor="#A9CF46" width="$trackerReport.items.progress%">
+						   $trackerReport.items.progress %
+						</td>
+						<td bgcolor="#7092BE" width="$trackerReport.items.progressRemaining%">
+						   
+						</td>
+					</tr>
+				</table>
+			
+			</td>
+			
+		</tr>
+	#end
+	
+</table>	

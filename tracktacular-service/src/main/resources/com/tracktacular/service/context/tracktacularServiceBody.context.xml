@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+  -
+  - Service context
+  -
+  - Defines beans specific to application services.
+  -
+  -->
+  
+<beans>
+
+
+	<!-- Body Service -->	
+	<bean id="body_bodyDao" parent="persistableDao">
+		<property name="entityClass" value="com.tracktacular.service.tracker.body.Body"/>
+	</bean>
+	
+	<bean id="body_bodyService" parent="serviceComponent" 
+	class="com.tracktacular.service.tracker.body.BodyServiceImpl" >
+		<property name="dao" ref="body_bodyDao"/>
+		<property name="findByUserFindCriteriaCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="body_bodyService.findByUserFindCriteriaCache"/>
+			</bean>
+		</property>	
+		<property name="findCountByUserFindCriteriaCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="body_bodyService.findCountByUserFindCriteriaCache"/>
+			</bean>
+		</property>	
+	</bean>
+	
+			
+	<!-- 
+	
+		Facade
+	
+	 -->
+	 
+	 
+	<bean id="bodyTrackerFacade" parent="coreComponent" 
+	class="com.tracktacular.service.tracker.body.BodyTrackerFacadeImpl" >
+		<property name="bodyService" ref="body_bodyService"/>
+	</bean>
+				
+		
+</beans>

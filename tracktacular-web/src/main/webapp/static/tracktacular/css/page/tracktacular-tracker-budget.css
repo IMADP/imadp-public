@@ -1,0 +1,25 @@
+.income {
+	color: #A9CF46;
+}
+
+.expense {
+	color: #FF5360;
+}
+
+div.item-leader-1 {width: 475px;}
+div.item-leader-2 {width: 415px;}
+div.item-leader-3 {width: 355px;}
+div.item-leader-4 {width: 295px;}
+div.item-leader-5 {width: 235px;}
+
+div.item-leader-left-1 {max-width: 365px;}
+div.item-leader-left-2 {max-width: 305px;}
+div.item-leader-left-3 {max-width: 245px;}
+div.item-leader-left-4 {max-width: 185px;}
+div.item-leader-left-5 {max-width: 125px;}
+
+div.item-leader-total-1 {width: 519px;}
+div.item-leader-total-2 {width: 459px;}
+div.item-leader-total-3 {width: 399px;}
+div.item-leader-total-4 {width: 339px;}
+div.item-leader-total-5 {width: 279px;}

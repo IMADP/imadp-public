@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.tracktacular.service.account.Preferences" table="account_preferences">
+	
+		<!-- Id -->
+    	<id name="id" column="id" type="long" unsaved-value="null">
+			<generator class="identity"/>
+		</id>
+		
+		
+		<!-- Version -->
+		<version name="version" column="version" unsaved-value="undefined" />
+		
+		
+		<!-- Global Properties -->
+		<property name="uid" column="uid" 
+		type="java.lang.String" length="36" unique="true" not-null="true" />
+		
+		<property name="timeCreated" column="time_created" 
+		type="long"	not-null="true" />
+		
+		<property name="timeModified" column="time_modified" 
+		type="long"	not-null="true" />
+		
+		<property name="persistableStateDate" column="persistable_state_date" 
+		type="org.joda.time.contrib.hibernate.PersistentDateTime" not-null="false" />
+		
+		<property name="persistableState" column="persistable_state" access="field"
+		length="10" not-null="false"> 
+			<type name="org.hibernate.type.EnumType"> 
+				<param name="enumClass">com.imadp.dao.PersistableState</param> 
+				<param name="type">12</param> 
+			</type> 
+		</property> 
+		
+		
+		<!-- Properties -->
+		<property name="emailAlerts" column="email_alerts" 
+		type="boolean" not-null="true" />
+		
+		<property name="blogNotification" column="blog_notification" 
+		type="boolean" not-null="true" />
+		
+		<component name="trackers" class="com.tracktacular.service.account.PreferencesTrackers">
+		
+			<property name="birthdayJson" column="trackers_birthday_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+			
+			<property name="bloodJson" column="trackers_blood_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+			
+			<property name="bodyJson" column="trackers_body_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+			
+			<property name="bookJson" column="trackers_book_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+			
+			<property name="bucketJson" column="trackers_bucket_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+			
+			<property name="budgetJson" column="trackers_budget_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+			
+			<property name="calendarJson" column="trackers_calendar_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+			
+			<property name="cholesterolJson" column="trackers_cholesterol_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+			
+			<property name="dreamJson" column="trackers_dream_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+			
+			<property name="exerciseJson" column="trackers_exercise_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+			
+			<property name="gameJson" column="trackers_game_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+			
+			<property name="giftJson" column="trackers_gift_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+			
+			<property name="goalJson" column="trackers_goal_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+			
+			<property name="journalJson" column="trackers_journal_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+			
+			<property name="movieJson" column="trackers_movie_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+			
+			<property name="musicJson" column="trackers_music_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+			
+			<property name="recipeJson" column="trackers_recipe_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+			
+			<property name="restaurantJson" column="trackers_restaurant_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+			
+			<property name="taskJson" column="trackers_task_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+				
+			<property name="tvJson" column="trackers_tv_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+				
+			<property name="wishJson" column="trackers_wish_json" 
+			length="5000" type="java.lang.String" not-null="false" />
+		
+		</component>
+			
+		<!-- References -->
+		<many-to-one name="user" column="user_id" 
+		cascade="none" lazy="false" fetch="join" class="com.imadp.service.user.User" not-null="true" />
+					 	
+
+    </class>
+</hibernate-mapping>

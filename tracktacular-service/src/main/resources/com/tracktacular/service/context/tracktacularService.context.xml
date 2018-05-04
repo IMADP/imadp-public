@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  -
+  - Service context
+  -
+  - Defines beans specific to application services.
+  -
+  -->
+  
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	 
+	<!-- Preferences Service --> 
+	<bean id="preferencesDao" parent="persistableDao">
+		<property name="entityClass" value="com.tracktacular.service.account.Preferences"/>
+	</bean>
+					
+	<bean id="preferencesService" parent="serviceComponent" 
+ 	class="com.tracktacular.service.account.PreferencesServiceImpl">
+		<property name="dao" ref="preferencesDao"/>
+		<property name="findByUserFindCriteriaCache">
+			<bean parent="cacheFactory">
+				<constructor-arg value="preferencesService.findByUserFindCriteriaCache"/>
+			</bean>
+		</property>			
+ 	</bean>
+ 	
+	<!-- Status Report Service -->
+	<bean id="statusReportService" parent="coreComponent"
+		class="com.tracktacular.service.admin.report.StatusReportServiceImpl">
+		<property name="logEntryService" ref="logEntryService" />
+		<property name="credentialsService" ref="credentialsService" />
+		<property name="feedbackService" ref="feedbackService" />
+		<property name="subscriptionService" ref="subscriptionService" />
+		<property name="trackersFacade" ref="trackersFacade" />
+		<property name="maxErrorLogEntries">
+			<value>${statusReportService.maxErrorLogEntries}</value>
+		</property> 
+		<property name="maxFeedback">
+			<value>${statusReportService.maxFeedback}</value>
+		</property> 
+		<property name="maxCredentials">
+			<value>${statusReportService.maxCredentials}</value>
+		</property> 
+		<property name="maxLogin">
+			<value>${statusReportService.maxLogin}</value>
+		</property>	    
+	</bean>
+	
+	
+	<!-- 
+	
+		Facades
+	
+	 -->
+	 
+	 
+	<bean id="adminFacade" parent="coreComponent" 
+	 class="com.tracktacular.service.admin.TracktacularAdminFacadeImpl"  >
+		<property name="blogCategoryService" ref="blogCategoryService" />
+		<property name="persistableEmailService" ref="persistableEmailService" />
+		<property name="preferencesService" ref="preferencesService" />
+		<property name="credentialsService" ref="credentialsService" />
+		<property name="cacheManager" ref="cacheManager"/>
+		<property name="accountFacade" ref="accountFacade" />
+		<property name="gameTrackerFacade" ref="gameTrackerFacade" />
+		<property name="trackersFacade" ref="trackersFacade" />
+		<property name="statusReportService" ref="statusReportService"/>
+		<property name="metricsService" ref="metricsService"/>
+		<property name="statusReportEmailAddress">
+			<value>${adminFacade.statusReportEmailAddress}</value>
+		</property> 
+	</bean>	
+	 
+	 
+	<bean id="accountFacade" parent="coreComponent" 
+	 class="com.tracktacular.service.account.TracktacularAccountFacadeImpl"  >
+		<property name="subscriptionFacade" ref="subscriptionFacade" />
+		<property name="preferencesService" ref="preferencesService" />
+		<property name="persistableEmailService" ref="persistableEmailService" />
+		<property name="credentialsService" ref="credentialsService" />
+		<property name="userService" ref="userService" />
+		<property name="digestor" ref="digestorJasypt" />		
+		<property name="authorityService" ref="authorityService"/>
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="emailAccountVerificationTemplate" value="AccountVerification" />
+		<property name="emailResetPasswordTemplate" value="ResetPassword" />
+		<property name="demoUserUid">
+			<value>${accountFacade.demoUserUid}</value>
+		</property>
+		<property name="referredCouponId">
+			<value>${accountFacade.referredCouponId}</value>
+		</property>
+		<property name="subscriptionPlanId">
+			<value>${accountFacade.subscriptionPlanId}</value>
+		</property>
+		<property name="emailAccountNotificationEmailAddress">
+			<value>${accountFacade.emailAccountNotificationEmailAddress}</value>
+		</property>
+	 </bean>	
+	
+	<bean id="blogFacade" parent="coreComponent" 
+	 class="com.tracktacular.service.blog.TracktacularBlogFacadeImpl"  >
+		<property name="blogCategoryService" ref="blogCategoryService"/>
+	</bean>
+	 
+	<bean id="subscriptionFacade" parent="coreComponent" 
+	 class="com.tracktacular.service.account.TracktacularSubscriptionFacadeImpl"  >
+		<property name="eventService" ref="eventService" />
+		<property name="persistableEmailService" ref="persistableEmailService" />
+		<property name="subscriptionPlanService" ref="subscriptionPlanService" />
+		<property name="subscriptionService" ref="subscriptionService" />
+		<property name="stripeApiKey">
+			<value>${subscriptionFacade.stripeApiKey}</value>
+		</property> 
+		<property name="subscriptionErrorEmailAddress">
+			<value>${subscriptionFacade.subscriptionErrorEmailAddress}</value>
+		</property>
+	</bean>	
+	 
+	 <bean id="supportFacade" parent="coreComponent" 
+ 	  class="com.tracktacular.service.support.TracktacularSupportFacadeImpl"  >
+		<property name="feedbackService" ref="feedbackService"/>	
+	 </bean>	
+	 
+	 <bean id="trackersFacade" parent="coreComponent" 
+ 	  class="com.tracktacular.service.tracker.TracktacularTrackersFacadeImpl" />
+ 	  
+		
+</beans>

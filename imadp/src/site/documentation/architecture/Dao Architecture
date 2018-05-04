@@ -1,0 +1,69 @@
+  =================================================================================================
+  
+   Dao Architecture                                          
+   
+  =================================================================================================
+  
+	Every persistable object should implement the IPersistable interface, or more specifically 
+    extend either AbstractPersistable or one of its subclasses. 
+    
+    There should be one dao class for every persistable entity (not necessarily tables, as the dao
+    may create supplementary join tables which should not be queried directly). All objects share 
+    the common values Long id as the primary key, and the optional Long timeCreated and 
+    timeModified fields.
+    
+    In general, static data (Countries, other non-changing entities), should be marked as 
+    immutable (mutable="false" in a hibernate mapping). 
+    
+    The IPersistableDao provides base functionality for the retrieval of any domain object, and 
+    is implemented by the concrete PersistableDaoImpl class. Both can be extended for additional
+    queries. They offer a get method to return the object by primary key, save, delete, and find
+    and search methods for advanced queries.
+    
+    It is important to note that no bulk delete method is provided that uses native SQL or HQL, 
+    and instead requires the lookup of every object and a single query for every delete. This is 
+    because hibernate may manage information about the deleted objects, such as the Lucene indexing
+    of searchable data. Bulk delete operations are dangerous in the sense that the Lucene indexing 
+    will be out of sync, however, if performance is a concern for highly volatile tables, it is 
+    recommended to subclass the IPersistableDao to offer bulk delete operations - as long as search
+    indexing is handled specifically by the overriding class.
+    
+    It is also important to note that the dao should not offer any kind of findFirst operation, as it 
+    should not be the dao's  responsibility to determine whether there is a single result found for
+    a query (the get method is the only exception, as it takes a primary key). Instead, let a service
+    layer interpret the results.
+        
+    The findBy(FindCriteria) is a powerful method that can handle the majority of use-cases for dao 
+    methods. With a FindCriteria, it is possible to restrict Properties on a variety of operations
+    by utilizing the ICriterion implementations, created through the factory class Criteria. However,
+    more advanced operations like joins should be accomplished in a dao class. Ideally, it should not
+    be possible for a service class to throw any kind of query exception through using Criteria.
+         
+    In terms of naming convention, is it best to use the Don't Repeat Yourself principle and a few 
+    guidelines. For example, voteDao.findVoteByObjectId(objectId) is slightly redundant and does 
+    not scale well with multiple arguments when compared to the much simpler 
+    voteDao.findBy(objectId).
+    
+    As a general rule, suffix the method with 'By' if the query is restricted by any parameters. 
+    Other naming guidelines include:
+    'findCount' when returning a row count
+    'findSum' when returning a summed value
+    'findAfter' when restricting after a date
+    'findBefore' when restricting before a date
+    'findOn' when finding on timeCreated for a date
+    'findX' when creating custom methods 
+    
+    There is no harm in being more specific with what is being found if it is currently unclear and
+    makes the code easier to read and not much more verbose 
+    (ie: voteDao.findRatingSum(Long objectId)).
+    
+    'By' should still be appended when restricting on parameters, and can be combined with any 
+    method name. The restricted parameters should appear towards the end of the method signature 
+    (ie: findAfterBy(Long timeCreated, User user)).
+    
+    The javadocs should serve to clarify any confusion about the method operation. In the event of 
+    two methods with the same signature type, it is advisable to either rename both more 
+    specifically, or rename the less frequently used method.
+      
+    Finally, all dao queries should be logged with the info level, with relevant but simplified 
+    information about the query.

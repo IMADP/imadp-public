@@ -1,0 +1,33 @@
+  =================================================================================================
+  
+   Facade Architecture                                          
+   
+  =================================================================================================
+ 
+    The facade layer provides another abstraction to the complexities of the service layer. A facade, by definition,
+    is a simplified interface to a complex subsystem. To make the the most reusable services, we often provide 
+    functionality that may not be used (or allowed) for a specific client.
+
+	For instance, search is a completely configurable feature that some applications may use and some may not. 
+	The ability to delete rows may be critical for some service, but should never be allowed for others (for example, 
+	static data such as Countries). Rather than restrict the generic nature of the services themselves, a facade can 
+	shield client code from functionality it cannot or should not be using, as well as simplify service operations 
+	and reduce service coupling.
+
+	All client applications (web, gui) should interact with facades, never services. It is a good practice to prefix 
+	the name of all facades with the name of the application, ie ILuckEffectAccountFacade to ensure that the facades 
+	were specifically designed for the application. Facades should encapsulate groups of common logic, some logical 
+	divisions include accounts, administration, support, stories, etc. They should not be too fine grained or too 
+	coarse, but ideally somewhere in between.
+
+	Facades should know very well the subsystem it is extracting. In other words, it should coordinate functions by 
+	calling the appropriate services, however there should be very little logic of its own outside of tying together 
+	information from other services.
+
+	For example, an account facade can coordination the creation and deletion of accounts by delegating to the 
+	appropriate services and providing transaction boundaries (see IAccountFacade).
+
+	Facades can also be used to ensure reference data is kept up to date between different services without 
+	coupling them. For instance, a facade can load an object from one service, and set a specific value from a 
+	different service if both of them are cached separately.    
+        

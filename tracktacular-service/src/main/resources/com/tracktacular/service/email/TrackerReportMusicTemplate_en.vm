@@ -1,0 +1,66 @@
+<table width="100%" cellpadding="10" style="border: 1px solid #C0C0C0;">
+
+	<tr>
+		<td style="font-size: large; font-weight: bold;" align="left" bgcolor="#C6D5DF">Music Report</td>
+	</tr>
+	
+	#if(!$trackerReport.enabled)
+		<tr>
+			<td>
+			   You have no albums in your library.     
+			</td>
+		</tr>
+	#else
+		<tr cellpadding="5">
+			<td align="left" bgcolor="#e3eaf0">
+			   $trackerReport.albumCount #if($trackerReport.albumCount == 1) Album #else Albums #end in your Library
+			</td>
+		</tr>
+		
+		#foreach($song in $trackerReport.targetDateSongs)
+	        <tr cellpadding="5">
+				<td align="left" bgcolor="#FFCBCB">
+				 	The target date for song <i>${song.title}</i> is today!
+				</td>
+			</tr>
+        #end
+		
+		#foreach($album in $trackerReport.targetDateAlbums)
+	        <tr cellpadding="5">
+				<td align="left" bgcolor="#FFCBCB">
+				 	The target date for album <i>${album.title}</i> is today!
+				</td>
+			</tr>
+        #end
+		
+		<tr>
+			<td>
+			    <a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-music/albums/by-artist">By Artist</a>
+			    <a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-music/albums/by-title">By Title</a>
+			    <a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-music/albums/by-tag">By Tag</a>
+				<a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-music/albums/by-rating">By Rating</a>  
+			</td>
+		</tr>
+		
+		#if($trackerReport.unratedAlbumCount > 0)
+			<tr>
+				<td>
+					<b>
+						$trackerReport.unratedAlbumCount Unrated #if($trackerReport.unratedAlbumCount == 1) Album #else Albums #end
+					</b>
+				</td>
+			</tr>
+			
+			#foreach($album in $trackerReport.unratedAlbums )
+	 			<tr>
+					<td>
+						$album.name <br/>
+						<i>$album.artist</i>
+					</td>
+				</tr>
+			#end
+			
+		#end
+	#end
+	
+</table>	

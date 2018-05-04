@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+  -
+  - IMADPCore context
+  -
+  - Defines components shared throughout the application.
+  -
+  -->
+  
+<beans>
+
+		
+	<!-- Core Component -->		
+	<bean id="coreComponent" abstract="true" init-method="init" destroy-method="destroy" />
+	
+	
+	<!-- Cache Manager -->		
+	<bean id="cacheManager" parent="coreComponent"
+	class="com.imadp.core.cache.CacheManagerConcurrentImpl" />
+	
+	
+	<!-- Cache Factory -->		
+	<bean id="cacheFactory" abstract="true" factory-bean="cacheManager" factory-method="getCache" />
+	
+			
+</beans>

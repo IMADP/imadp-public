@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+ "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+  -
+  - Web context
+  -
+  - The central point of entry for building an application context.
+  -
+  -->
+
+<beans>
+
+
+	<!-- Tracktacular Version -->
+	<bean id="tracktacularVersion" class="com.tracktacular.web.TracktacularVersion">
+		<property name="versions">
+			<map>
+			    <!-- Values provided by Maven -->
+				<entry key="version.page"                 		value="${version.page}" />
+				<entry key="version.page.mobile"           		value="${version.page.mobile}" />
+				<entry key="version.page.tracker.birthday" 		value="${version.page.tracker.birthday}" />
+				<entry key="version.page.tracker.blood" 		value="${version.page.tracker.blood}" />
+				<entry key="version.page.tracker.book" 			value="${version.page.tracker.book}" />
+				<entry key="version.page.tracker.body" 			value="${version.page.tracker.body}" />
+				<entry key="version.page.tracker.bucket" 		value="${version.page.tracker.bucket}" />
+				<entry key="version.page.tracker.budget" 		value="${version.page.tracker.budget}" />
+				<entry key="version.page.tracker.calendar" 		value="${version.page.tracker.calendar}" />
+				<entry key="version.page.tracker.cholesterol" 	value="${version.page.tracker.cholesterol}" />
+				<entry key="version.page.tracker.dream" 		value="${version.page.tracker.dream}" />
+				<entry key="version.page.tracker.game"    		value="${version.page.tracker.game}" />
+				<entry key="version.page.tracker.gift"    		value="${version.page.tracker.gift}" />
+				<entry key="version.page.tracker.goal"    		value="${version.page.tracker.goal}" />
+				<entry key="version.page.tracker.exercise"  	value="${version.page.tracker.exercise}" />
+				<entry key="version.page.tracker.journal" 		value="${version.page.tracker.journal}" />
+				<entry key="version.page.tracker.movie" 		value="${version.page.tracker.movie}" />
+				<entry key="version.page.tracker.music" 		value="${version.page.tracker.music}" />
+				<entry key="version.page.tracker.recipe" 		value="${version.page.tracker.recipe}" />
+				<entry key="version.page.tracker.restaurant"	value="${version.page.tracker.restaurant}" />
+				<entry key="version.page.tracker.task"    		value="${version.page.tracker.task}" />
+				<entry key="version.page.tracker.tv"    		value="${version.page.tracker.tv}" />
+				<entry key="version.page.tracker.wish"    		value="${version.page.tracker.wish}" />
+			</map>
+		</property>
+	</bean>
+	
+	<!-- Remember Me Service -->
+	<bean id="rememberMeService" class="com.imadp.web.security.RememberMeServices">
+		<property name="userDetailsService" ref="credentialsService" />
+		<property name="tokenValiditySeconds" >
+			<value>$web{rememberMeService.tokenValiditySeconds}</value>
+		</property>
+		<property name="key">
+			<value>$web{rememberMeService.key}</value>
+		</property>
+	</bean>
+	
+	
+</beans>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+  -
+  - IMADPService context
+  -
+  - Defines components shared throughout the application.
+  -
+  -->
+  
+<beans>
+
+
+	<!-- SQL Resources -->
+	<bean id="insertSubscriptionPlansSql" class="java.lang.String">
+		<constructor-arg>
+			<value>com/tracktacular/service/test/support/dao/mysql/InsertSubscriptionPlans.sql</value>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="insertAuthoritiesSql" class="java.lang.String">
+		<constructor-arg>
+			<value>com/tracktacular/service/test/support/dao/mysql/InsertAuthorities.sql</value>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="insertCountriesSql" class="java.lang.String">
+		<constructor-arg>
+			<value>com/tracktacular/service/test/support/dao/mysql/InsertCountries.sql</value>
+		</constructor-arg>
+	</bean>
+	
+	
+	<!-- Hibernate SessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mappingResources" ref="mappingResources" />
+        <property name="hibernateProperties">
+	        <props>
+	     	    <prop key="hibernate.show_sql">$support{sessionFactory.hibernate.show_sql}</prop> 
+	            <prop key="hibernate.dialect">$support{sessionFactory.hibernate.dialect}</prop>
+	            <prop key="hibernate.hbm2ddl.auto">$support{sessionFactory.hibernate.hbm2ddl.auto}</prop>
+	            <prop key="hibernate.bytecode.provider">$support{sessionFactory.hibernate.bytecode.provider}</prop>
+	            <prop key="hibernate.generate_statistics">$support{sessionFactory.hibernate.generate_statistics}</prop>
+	            <prop key="hibernate.search.default.directory_provider">$support{sessionFactory.hibernate.search.default.directory_provider}</prop>
+	            <prop key="hibernate.search.default.indexBase">$support{java.io.tmpdir}</prop> 
+		    </props>
+        </property>
+        <property name="entityInterceptor">
+        	<bean class="com.imadp.dao.hibernate.TimestampInterceptor" />	
+        </property>
+    </bean>
+    
+    
+    <!-- Datasource -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+		<property name="driverClassName">
+			<value>$support{dataSource.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>$support{dataSource.url}</value>
+		</property>
+		<property name="username">
+			<value>$support{dataSource.username}</value>
+		</property>
+		<property name="password">
+			<value>$support{dataSource.password}</value>
+		</property>
+	</bean>
+
+	
+</beans>

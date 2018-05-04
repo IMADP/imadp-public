@@ -1,0 +1,12 @@
+  =================================================================================================
+  
+   Checkout SVN Project                               
+   
+  =================================================================================================
+ 
+ 	- If a repository is not added see IMADP > Documentation > Configuration > Add SVN Repository   
+    - Right click all desired projects from a branch > Checkout > Finish
+    - Convert project to Maven nature
+    - Maven > Update project configuration
+    - Remove excludes on test resources
+    - Add spring project nature

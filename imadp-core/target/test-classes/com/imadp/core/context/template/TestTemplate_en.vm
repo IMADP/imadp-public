@@ -1,0 +1,3 @@
+#set($subject = "Subject_en")
+#set($from = "From_en")
+SampleContent_en

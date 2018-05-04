@@ -1,0 +1,13 @@
+  =================================================================================================
+  
+   IMADPWebStripes Bugs                     
+   
+  =================================================================================================
+ 
+	o @UrlBinding("/")
+		- This binding will break all custom 404 pages. A temporary solution is to use an index.jsp
+		  to forward the initial request according to the web.xml welcome list to another action bean.   
+
+    o <s:radioButton>
+		- Radio buttons do not work with custom objects set into the checked attribute.   
+   

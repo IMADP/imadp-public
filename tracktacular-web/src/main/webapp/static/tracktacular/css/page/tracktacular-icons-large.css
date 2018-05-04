@@ -1,0 +1,90 @@
+/*
+ * Icons
+ *
+ */ 
+ 
+.icon-l {
+	display:inline-block;
+	background-image: url(/static/tracktacular/img/page/icons-large-1.5.png);
+	background-repeat: no-repeat;
+	width: 32px;
+	height: 32px;
+}
+
+.icon-l-blank {
+	display:inline-block;
+	width: 32px;
+	height: 32px;
+}
+
+.l-task { background-position: -1px -1px; } /* 1,1 */ 
+.l-journal { background-position: -35px -1px; } /* 1,2 */ 
+.l-goal { background-position: -69px -1px; } /* 1,3 */ 
+.l-birthday { background-position: -103px -1px; } /* 1,4 */
+.l-budget { background-position: -137px -1px; } /* 1,5 */
+.l-calendar { background-position: -171px -1px; } /* 1,6 */ 
+.l-dream { background-position: -205px -1px; } /* 1,7 */ 
+.l-recipe { background-position: -239px -1px; } /* 1,8 */
+
+.l-body { background-position: -1px -35px; } /* 2,1 */ 
+.l-cholesterol { background-position: -35px -35px; } /* 2,2 */ 
+.l-exercise { background-position: -69px -35px; } /* 2,3 */ 
+.l-book { background-position: -103px -35px; } /* 2,4 */
+.l-movie { background-position: -137px -35px; } /* 2,5 */
+.l-game { background-position: -171px -35px; } /* 2,6 */ 
+.l-tv { background-position: -205px -35px; } /* 2,7 */ 
+.l-music { background-position: -239px -35px; } /* 2,8 */
+
+.l-bucket{ background-position: -1px -69px; } /* 3,1 */ 
+.l-blood { background-position: -35px -69px; } /* 3,2 */ 
+.l-restaurant { background-position: -69px -69px; } /* 3,3 */ 
+.l-gift { background-position: -103px -69px; } /* 3,4 */
+.l-wish { background-position: -137px -69px; } /* 3,5 */
+.l-XXX { background-position: -171px -69px; } /* 3,6 */ 
+.l-XXX { background-position: -205px -69px; } /* 3,7 */ 
+.l-XXX { background-position: -239px -69px; } /* 3,8 */
+
+.l-XXX{ background-position: -1px -103px; } /* 4,1 */ 
+.l-XXX { background-position: -35px -103px; } /* 4,2 */ 
+.l-XXX { background-position: -69px -103px; } /* 4,3 */ 
+.l-XXX { background-position: -103px -103px; } /* 4,4 */
+.l-XXX { background-position: -137px -103px; } /* 4,5 */
+.l-XXX { background-position: -171px -103px; } /* 4,6 */ 
+.l-XXX { background-position: -205px -103px; } /* 4,7 */ 
+.l-XXX { background-position: -239px -103px; } /* 4,8 */
+
+.l-cog { background-position: -1px -137px; } /* 5,1 */ 
+.l-add { background-position: -35px -137px; } /* 5,2 */ 
+.l-success { background-position: -69px -137px; } /* 5,3 */ 
+.l-warn { background-position: -103px -137px; } /* 5,4 */
+.l-info { background-position: -137px -137px; } /* 5,5 */
+.l-error { background-position: -171px -137px; } /* 5,6 */ 
+.l-join { background-position: -205px -137px; } /* 5,7 */ 
+.l-account { background-position: -239px -137px; } /* 5,8 */
+
+.l-feedback { background-position: -1px -171px; } /* 6,1 */ 
+.l-login { background-position: -35px -171px; } /* 6,2 */ 
+.l-logout { background-position: -69px -171px; } /* 6,3 */ 
+.l-XXX { background-position: -103px -171px; } /* 6,4 */
+.l-XXX { background-position: -137px -171px; } /* 6,5 */
+.l-XXX { background-position: -171px -171px; } /* 6,6 */ 
+.l-XXX { background-position: -205px -171px; } /* 6,7 */ 
+.l-alert { background-position: -239px -171px; } /* 6,8 */
+
+.l-XXX{ background-position: -1px -205px; } /* 7,1 */ 
+.l-XXX { background-position: -35px -205px; } /* 7,2 */ 
+.l-XXX { background-position: -69px -205px; } /* 7,3 */ 
+.l-blog { background-position: -103px -205px; } /* 7,4 */
+.l-email { background-position: -137px -205px; } /* 7,5 */
+.l-mobile { background-position: -171px -205px; } /* 7,6 */ 
+.l-android-bookmark { background-position: -205px -205px; } /* 7,7 */ 
+.l-iphone-bookmark { background-position: -239px -205px; } /* 7,8 */
+
+.l-social-facebook{ background-position: -1px -239px; } /* 8,1 */ 
+.l-social-twitter { background-position: -35px -239px; } /* 8,2 */ 
+.l-social-stumble { background-position: -69px -239px; } /* 8,3 */ 
+.l-social-google { background-position: -103px -239px; } /* 8,4 */
+.l-social-rss { background-position: -137px -239px; } /* 8,5 */
+.l-social-email { background-position: -171px -239px; } /* 8,6 */ 
+.l-desc { background-position: -205px -239px; } /* 8,7 */ 
+.l-asc { background-position: -239px -239px; } /* 8,8 */

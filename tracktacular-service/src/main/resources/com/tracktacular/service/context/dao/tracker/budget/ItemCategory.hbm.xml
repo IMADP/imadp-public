@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.tracktacular.service.tracker.budget.ItemCategory" table="tracker_budget_item_categories">
+	
+		<!-- Id -->
+    	<id name="id" column="id" type="long" unsaved-value="null">
+			<generator class="identity"/>
+		</id>
+		
+		
+		<!-- Version -->
+		<version name="version" column="version" unsaved-value="undefined" />
+		
+		
+		<!-- Global Properties -->
+		<property name="uid" column="uid" 
+		type="java.lang.String" length="36" unique="true" not-null="true" />
+		
+		<property name="timeCreated" column="time_created" 
+		type="long"	not-null="true" />
+		
+		<property name="timeModified" column="time_modified" 
+		type="long"	not-null="true" />
+		
+		<property name="persistableStateDate" column="persistable_state_date" 
+		type="org.joda.time.contrib.hibernate.PersistentDateTime" not-null="false" />
+		
+		<property name="persistableState" column="persistable_state" access="field"
+		length="10" not-null="false"> 
+			<type name="org.hibernate.type.EnumType"> 
+				<param name="enumClass">com.imadp.dao.PersistableState</param> 
+				<param name="type">12</param> 
+			</type> 
+		</property> 
+		
+		
+		<!-- Properties -->
+		<property name="name" column="name" 
+		length="35" type="java.lang.String" not-null="true" />
+		
+		<property name="sort" column="sort" 
+		type="int" not-null="true" />
+		
+		<property name="collapsed" column="collapsed" 
+		type="boolean" not-null="false"/>
+				
+				
+		<!-- References -->
+		<set name="items" table="budget_items" cascade="none" lazy="false" fetch="subselect" order-by="sort, name">
+        	<key column="category_id" on-delete="noaction" update="false"/>
+        	<one-to-many class="com.tracktacular.service.tracker.budget.Item"/>
+     	</set>	
+	    	
+	    <set name="childCategories" table="budget_item_categories" cascade="none" lazy="false" fetch="subselect" order-by="sort, name">
+        	<key column="parent_category_id" on-delete="noaction" update="false"/>
+        	<one-to-many class="com.tracktacular.service.tracker.budget.ItemCategory"/>
+     	</set>	
+	    	
+	    <many-to-one name="user" column="user_id" cascade="none" lazy="false" fetch="join" 
+		class="com.imadp.service.user.User" not-null="true" />						 		 		
+				
+		<many-to-one name="budget" column="budget_id" cascade="none" lazy="false" fetch="join" 
+		class="com.tracktacular.service.tracker.budget.Budget" not-null="true" />						 		 		
+				
+		<many-to-one name="parentCategory" column="parent_category_id" cascade="none" lazy="false" fetch="join" 
+		class="com.tracktacular.service.tracker.budget.ItemCategory" not-null="false" />
+						 	
+						 		 		
+    </class>
+</hibernate-mapping>

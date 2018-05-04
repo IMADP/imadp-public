@@ -1,0 +1,142 @@
+/*
+ * Dialog Forms
+ *
+ */ 
+ 
+.dialog-form {
+	margin: 50px 60px;
+	padding: 0;
+	background: white;
+}
+
+.dialog-form-heading {
+	padding:11px;
+	background: #5C9CCC url(/static/tracktacular/img/lib/redmond/ui-bg_gloss-wave_55_5c9ccc_500x100.png) 50% 50% repeat-x;
+	color: #fff;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 16px;
+	margin: 3px;
+}
+
+.dialog-form-body {
+	padding: 30px 40px;
+}
+
+.dialog-form-footer {
+	padding:11px;
+}
+
+.dialog-form-footer-img {
+	float:left;
+	margin-left: 210px;
+}
+
+.dialog-form-footer-button {
+	float:right;
+	margin-right: 10px;
+}
+
+.dialog-form-button { 
+   outline: 0; 
+   padding: .4em 1em; 
+   text-decoration:none !important; 
+   cursor:pointer; 
+   position: relative; 
+   text-align: center; 
+   zoom: 1; 
+}
+
+.dialog-form hr {
+	margin: 0;
+}
+
+.dialog-form div.half {
+	width: 268px;
+	float:left;
+	margin-left: 50px;
+}
+
+.dialog-form div.half:first-child {
+	margin-left: 0px;
+}
+
+.dialog-form div.third {
+	width: 162px;
+	float:left;
+	margin-left: 50px;
+}
+
+.dialog-form div.third:first-child {
+	margin-left: 0px;
+}
+
+.dialog-form div.fourth {
+	width: 109px;
+	float:left;
+	margin-left: 50px;
+}
+
+.dialog-form div.fourth:first-child {
+	margin-left: 0px;
+}
+
+.dialog-form input[type=text], .dialog-form input[type=number], .dialog-form input[type=password], textarea {
+	width: 100%;
+	margin-top: 5px;
+}
+
+.dialog-form label {
+	display:block;
+}
+
+.dialog-form label.inline {
+	display:inline;
+}
+
+.dialog-form label.required {
+	font-weight: bold;
+}
+
+.dialog-form label.required:after {
+	color: red;
+	content: "*";
+	font-weight: bold;
+	font-family: Verdana;
+	padding-left: 3px;
+	line-height: 16px;
+}
+
+.dialog-form label.primary {
+	margin-top: 20px; 
+	color: #3E576F;
+	font-size: 16px;
+}
+ 
+.dialog-form label.secondary {
+	color: #6D869F;
+	font-size: 12px;
+}
+ 
+.dialog-form label.error, .dialog-form div.error {
+	color: #C41F0D;	 
+}
+
+.dialog-form .validation-errors {
+	color: #C41F0D;
+	font-weight: bold;
+}
+
+.dialog-form div.message-box {
+	margin: 0 0 20px 0;
+	padding: 0;
+}
+
+a.dialog-form-button {
+	color: #2E6E9E !important;
+}
+
+a.ui-state-active {
+	color: #E17009 !important;
+}

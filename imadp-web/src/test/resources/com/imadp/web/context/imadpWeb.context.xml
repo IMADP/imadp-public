@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+  -
+  - Web context
+  -
+  - Defines beans specific to application web components.
+  -
+  -->
+  
+<beans>
+
+	
+	<!-- Billing Transaction Dispatcher Paypal --> 
+	<bean id="billingTransactionDispatcherPaypal" parent="coreComponent" 
+	class="com.imadp.web.commerce.order.billing.BillingTransactionDispatcherPaypalImpl" >
+		<property name="orderService" ref="orderService"/>
+		<property name="countryService" ref="countryService"/>
+		<property name="live">
+			<value>${billingTransactionDispatcherPaypal.live}</value>
+		</property>
+	</bean>
+		
+			
+</beans>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+  -
+  - IMADPService context
+  -
+  - Defines components shared throughout the application.
+  -
+  -->
+  
+<beans>
+   
+    
+    <!-- Hibernate SessionFactory -->
+    <bean id="sessionFactory" 
+    class="com.imadp.dao.hibernate.criteria.search.SearchSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="searchMappingConfiguration" ref="searchMappingConfiguration"/>
+        <property name="mappingResources" ref="mappingResources" />
+        <property name="hibernateProperties">
+	        <props>
+	     	    <prop key="hibernate.show_sql">$test{sessionFactory.hibernate.show_sql}</prop> 
+	            <prop key="hibernate.dialect">$test{sessionFactory.hibernate.dialect}</prop>
+	            <prop key="hibernate.hbm2ddl.auto">$test{sessionFactory.hibernate.hbm2ddl.auto}</prop>
+	            <prop key="hibernate.bytecode.provider">$test{sessionFactory.hibernate.bytecode.provider}</prop>
+	            <prop key="hibernate.generate_statistics">$test{sessionFactory.hibernate.generate_statistics}</prop>
+	            <prop key="hibernate.search.default.directory_provider">$test{sessionFactory.hibernate.search.default.directory_provider}</prop>
+	            <prop key="hibernate.search.default.indexBase">${java.io.tmpdir}</prop> 
+		    </props>
+        </property>
+        <property name="entityInterceptor">
+        	<bean class="com.imadp.dao.hibernate.TimestampInterceptor" />	
+        </property>
+    </bean>
+    
+    
+    <!-- Datasource -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+		<property name="driverClassName">
+			<value>$test{dataSource.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>$test{dataSource.url}</value>
+		</property>
+		<property name="username">
+			<value>$test{dataSource.username}</value>
+		</property>
+	</bean>
+
+	
+</beans>

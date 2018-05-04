@@ -1,0 +1,28 @@
+<table width="100%" cellpadding="10" style="border: 1px solid #C0C0C0;">
+
+	<tr>
+		<td style="font-size: large; font-weight: bold;" align="left" bgcolor="#C6D5DF">Wish List Report</td>
+	</tr>
+	
+	#if(!$trackerReport.enabled)
+		<tr>
+			<td>
+			   You have no items on your wish list with prices.     
+			</td>
+		</tr>
+	#else
+		<tr cellpadding="5">
+			<td align="left" bgcolor="#e3eaf0">
+			   $trackerReport.items.itemCount #if($trackerReport.items.itemCount == 1) Item #else Items #end on your Wish List
+			</td>
+		</tr>
+		#foreach($item in $trackerReport.items.items)
+			<tr>
+				<td>
+					$item.name #if($item.price)<i>$$item.price.amount</i>#end		
+				</td>
+			</tr>
+		#end
+	#end
+	
+</table>	

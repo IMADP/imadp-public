@@ -1,0 +1,126 @@
+  =================================================================================================
+  
+   IMADPService                          
+   
+  =================================================================================================
+ 
+  =================================================================================================
+ 
+    Dao
+ 
+    This component provides a facade for data access objects. The IPersistable interface is 
+    provided to mark persistable objects, as well as an abstract base class AbstractPersistable
+    for model implementations.
+    
+    Persistable objects should provide static and public Property objects which can be used for 
+    querying and sorting. The actual retrieval operations are done through the IPersistableDao 
+    interface. IPersistableDao provides common crud operations, as well as find and search
+	operations through the FindCriteria and SearchCriteria objects.
+    
+    FindCriteria and SearchCriteria are constructed in part from both services and clients. 
+    CriteriaParams are intended to be exposed to clients to allow customization of results, 
+    for example pagination and sorting. The actual criteria objects should be limited to the 
+    service scope.
+    
+    FindCriteria and SearchCriteria provides a powerful way to expose common and type-safe
+    dao operations. They are build through the corresponding IFindCriteriaBuilder and
+    ISearchCriteriaBuilder implementations, following the Builder Patter for object construction.
+    
+    A Hibernate implementation is provided along with built in support for Apache Lucene searching. 
+        
+    Associations Guide:
+ 
+    There are several types of associations. Identifying which association to use for domain 
+    objects is a crucial architecture decision. The association decision will affect the 
+    performance of the application, the ability to paginate data, and the responsibility of the 
+    services involved. Follow the example associations to determine which one best suits your 
+    domain model.
+
+	Hibernate Associations
+ 
+	1) Unidirectional Many-to-One or One-to-One (one way reference) 
+	 
+	Story
+	 User user;
+	
+	User
+	
+	Explanation: 
+	 A many-to-one relationship relates many entities to a single unique entity. The 
+	 example above can be read as Many-Stories-to-One-User. Or in other words, each Story must 
+	 have exactly one User, but a User may have many Stories.
+	
+	 A Story service should never update a User. It should also specifically set cascade="none"
+	 in its reference mapping to prevent automatic updates.
+	
+	 Note - to restrict this relationship to a one-to-one, simple add unique="true" in the 
+	 many-to-one mapping. 
+	
+	 In this relationship, it would be easy to paginate the Stories for a particular User. However,
+	 any properties of the user object may not always be up to date, as any changes to the User are 
+	 done through the UserService and not the StoryService. If this data needs to be up to date, you 
+	 should use a service facade to pull the User from the UserService on Story retrievals.
+	
+	Examples:
+	 Person-to-User
+	 Address-to-User
+	 Credentials-to-User (One-to-One)
+	 Task-to-Category
+	 Vote-to-User
+	
+	2) Unidirectional One-to-Many (one way collection)
+	
+	Credentials
+	 Set<Authority> authorities;
+	
+	Authority
+	
+	Explanation: 
+	 A one-to-many relationship relates one unique entity to many other entities. The 
+	 example above can be read as One-Credentials-to-Many-Authorities. 
+	
+	 A join table is recommended to maintain the relationship. Authorities are considered entirely
+	 separate entities, and should not know anything about their relationship with Credentials.
+	 Credentials, while aware of the relationship, should never update Authority objects, only
+	 the join table that defines their relationship.
+	
+	 Any changes to the collection are done on the Credentials object, and saving that object 
+	 will update the join table to match the collection present at the time of saving.
+	
+	 In this relationship, it is impossible to paginate the Authorities that belong to
+	 a specific Credentials through the database, as they are meant to be loaded as one unit.
+	 
+	Examples:
+	 Credentials-to-Authorities
+	 
+	
+	3) Bidirectional One-to-Many (two way collection)
+	
+	Category
+	 Set<Task> tasks;
+	
+	Task
+	 Category
+	
+	Explanation: 
+	 A one-to-many relationship relates one unique entity to many other entities. The 
+	 example above can be read as One-Category-to-Many-Tasks. The bidirectionality allows the
+	 Task to refer back to its Category as well.
+	 
+	 With this relationship, either entity has the power to modify the relationship, therefore
+	 care must be taken to ensure the relationship is maintained correctly. The cardinal rule is
+	 to use the Category objects for retrievals, and use the Task objects to maintain the relationship.
+	 However, these entities are tightly coupled, and the CategoryService needs to be aware of these
+	 changes if caching is used in either service.
+	
+	 This can be accomplished by using by using two services: ICategoryService and ITaskService, 
+	 but requiring the ICategoryService to hold an internal reference to the ITaskService. All Task updates
+	 should be funnelled through the ICategoryService, which will know when to expire its caches.
+	  
+	 In this relationship, it is impossible to database paginate the Tasks that belong to
+	 a specific Category. Additionally, you may run into Category pagination problems (or duplicate results)
+	 unless you make sure to set the fetch mode equal to "subselect" in the mapping configuration.
+	 
+	Examples:
+	 Category-to-Tasks
+    

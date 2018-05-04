@@ -1,0 +1,65 @@
+<table width="100%" cellpadding="10" style="border: 1px solid #C0C0C0;">
+
+	<tr>
+		<td style="font-size: large; font-weight: bold;" align="left" bgcolor="#C6D5DF">Tv Report</td>
+	</tr>
+	
+	#if(!$trackerReport.enabled)
+		<tr>
+			<td>
+			   You have no shows in your library.     
+			</td>
+		</tr>
+	#else
+		<tr cellpadding="5">
+			<td align="left" bgcolor="#e3eaf0">
+			   $trackerReport.showCount #if($trackerReport.showCount == 1) Show #else Shows #end in your Library
+			</td>
+		</tr>
+		
+		#foreach($show in $trackerReport.targetDateShows)
+	        <tr cellpadding="5">
+				<td align="left" bgcolor="#FFCBCB">
+				 	The target date for show <i>${show.title}</i> is today!
+				</td>
+			</tr>
+        #end
+		
+		#foreach($episode in $trackerReport.targetDateEpisodes)
+	        <tr cellpadding="5">
+				<td align="left" bgcolor="#FFCBCB">
+				 	The target date for episode/season <i>${episode.title}</i> is today!
+				</td>
+			</tr>
+        #end
+		
+		<tr>
+			<td>
+			    <a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-tv/shows/by-title">By Title</a>
+			    <a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-tv/shows/by-tag">By Tag</a>
+				<a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-tv/shows/by-rating">By Rating</a>
+			</td>
+		</tr>
+		
+		#if($trackerReport.unratedShowCount > 0)
+			<tr>
+				<td>
+					<b>
+						$trackerReport.unratedShowCount Unrated #if($trackerReport.unratedShowCount == 1) Show #else Shows #end
+					</b>
+				</td>
+			</tr>
+			
+			#foreach($show in $trackerReport.unratedShows )
+	 			<tr>
+					<td>
+						$show.title <br/>
+						#if($show.tag)<i>$show.tag</i> <br/>#end
+					</td>
+				</tr>
+			#end
+			
+		#end
+	#end
+	
+</table>	

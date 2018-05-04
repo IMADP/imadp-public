@@ -1,0 +1,113 @@
+#set($subject = "Status Report - ${statusReport.dateTimeStringLong} - [L${statusReport.recentLoginCount}-C${statusReport.recentCredentialsCount}-E${statusReport.recentErrorLogEntryCount}-F${statusReport.recentFeedbackCount}]")
+#set($from = "webmaster@tracktacular.com")
+#set($fromAlias = "Tracktacular")	
+
+#parse("AbstractEmailHeader_en.vm")
+
+	#set($title = "Status Report" )
+	
+	#contentStart($title)
+	
+		<table style="width:200px;margin:0 auto;">
+			<tr>
+				<td><strong style="font-size: medium;">Credentials</strong></td>
+				<td>${statusReport.credentialsCount}</td>
+			</tr>
+			<tr>
+				<td><strong style="font-size: medium;">Feedback</strong></td>
+				<td>${statusReport.feedbackCount}</td>
+			</tr>
+			<tr>
+				<td><strong style="font-size: medium;">Error Log Entries</strong></td>
+				<td>${statusReport.errorLogEntryCount}</td>
+			</tr>						
+		</table>
+		
+		<br/>
+	 	<br/>
+	 	
+	 	<strong>Tracker Users</strong>	
+	 		
+		<table style="width:200px;margin:0 auto;">
+
+			<tr>
+				<td>Tracker</td>
+				<td>Recent Users</td>
+				<td>Total Users</td>
+			</tr>
+			#foreach($tracker in $statusReport.distinctRecentUserCountMap.keySet() )
+				<tr>
+					<td><strong style="font-size: medium;">$tracker.capitalizedName</strong></td>
+					<td>$statusReport.distinctRecentUserCountMap.get($tracker)</td>
+					<td>$statusReport.distinctUserCountMap.get($tracker)</td>
+				</tr>
+			#end
+			
+		</table>
+		
+		<br/>
+	 	<br/>
+	 	
+		<strong>Total Credentials: ${statusReport.credentialsCount}</strong>													
+		<br />								
+		<strong>Recent Logins: ${statusReport.recentLoginCount}</strong>													
+		<br />		
+		<br />		
+								
+		#foreach($credentials in $statusReport.recentLogin )
+		    <div style="border:1px solid green;margin:15px;padding:10px;">
+		 		<strong>Username:</strong> $credentials.username <br/>
+		 		<strong>Email:</strong> $credentials.email <br/>
+		 		<strong>Status:</strong> $statusReport.subscriptionMap.get($credentials).subscriptionStatus <br/>
+		 		<strong>Trackers:</strong> $statusReport.trackerUserMap.get($credentials)<br/>
+		 		<strong>Date:</strong> $dateTool.format('MMM dd, yyyy - h:mm a', $credentials.lastLoginDate.millis) <br/>
+		 	</div>						 	
+		#end
+	 	
+		<strong>Total Credentials: ${statusReport.credentialsCount}</strong>													
+		<br />								
+		<strong>Recent Joins: ${statusReport.recentCredentialsCount}</strong>													
+		<br />		
+		<br />		
+								
+		#foreach($credentials in $statusReport.recentCredentials )
+		    <div style="border:1px solid green;margin:15px;padding:10px;">
+		 		<strong>Username:</strong> $credentials.username <br/>
+		 		<strong>Email:</strong> $credentials.email <br/>
+		 		<strong>Date:</strong> $dateTool.format('MMM dd, yyyy - h:mm a', $credentials.lastLoginDate.millis) <br/>
+		 	</div>						 	
+		#end
+	 	
+		<strong>Total Feedback: ${statusReport.feedbackCount}</strong>													
+		<br />								
+		<strong>Recent Feedback: ${statusReport.recentFeedbackCount}</strong>													
+		<br />								
+		<br />		
+		
+		#foreach($feedback in $statusReport.recentFeedback )
+		    <div style="border:1px solid blue;margin:15px;padding:10px;">
+		 		$feedback.content
+		 	</div>				 	
+		#end
+	 	
+		<strong>Total Error Log Entries: ${statusReport.errorLogEntryCount}</strong>													
+		<br />								
+		<strong>Recent Error Log Entries: ${statusReport.recentErrorLogEntryCount}</strong>													
+		<br />		
+		<br />		
+								
+		#foreach($errorLogEntry in $statusReport.recentErrorLogEntries )
+		    <div style="border:1px solid red;margin:15px;padding:10px;">
+		 		<strong>Logger:</strong> $errorLogEntry.logger <br/>
+		 		<strong>Thread:</strong> $errorLogEntry.thread <br/>
+		 		<strong>Level:</strong> $errorLogEntry.level <br/>
+		 		<strong>Cause Class:</strong> $errorLogEntry.throwableCauseClass <br/>
+		 		<strong>Cause Message:</strong> $errorLogEntry.throwableCauseMessage <br/>
+		 		<strong>Cause Source:</strong> $errorLogEntry.throwableCauseSource <br/>
+		 		<strong>Timestamp:</strong> $errorLogEntry.timestamp <br/>
+		 	</div>						 	
+		#end
+						
+	#contentEnd
+
+#parse("AbstractEmailFooter_en.vm")

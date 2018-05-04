@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd" updateCheck="false">
+
+    <!-- Sets the path to the directory where cache .data files are created.
+
+         If the path is a Java System Property it is replaced by
+         its value in the running VM.
+
+         The following properties are translated:
+         user.home - User's home directory
+         user.dir - User's current working directory
+         java.io.tmpdir - Default temp file path
+     -->
+    <diskStore path="java.io.tmpdir"/>
+	
+
+    <!--
+    	Default Cache configuration. These will applied to caches programmatically created through
+        the CacheManager.
+
+        The following attributes are required for defaultCache:
+
+        maxInMemory       - Sets the maximum number of objects that will be created in memory
+        eternal           - Sets whether elements are eternal. If eternal,  timeouts are ignored and the element
+                            is never expired.
+        timeToIdleSeconds - Sets the time to idle for an element before it expires.
+                            i.e. The maximum amount of time between accesses before an element expires
+                            Is only used if the element is not eternal.
+                            Optional attribute. A value of 0 means that an Element can idle for infinity
+        timeToLiveSeconds - Sets the time to live for an element before it expires.
+                            i.e. The maximum time between creation time and when an element expires.
+                            Is only used if the element is not eternal.
+        overflowToDisk    - Sets whether elements can overflow to disk when the in-memory cache
+                            has reached the maxInMemory limit.
+    -->
+	<defaultCache
+        maxElementsInMemory="10000"
+        eternal="false"
+        timeToIdleSeconds="120"
+        timeToLiveSeconds="120"
+        overflowToDisk="true"
+        diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120"
+        memoryStoreEvictionPolicy="LRU"
+        />
+        
+              
+	<!--
+	
+     
+     	Service Caches
+     
+     	     	  	
+     -->
+	     
+     
+    <!-- List of Countries [SINGLE VALUE] -->
+	<cache name="countryService.findByFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="1" timeToIdleSeconds="86400" />   
+  
+	<!-- List of Authorities [FIVE VALUES] -->
+	<cache name="authorityService.findByFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="5" timeToIdleSeconds="86400" />   
+  	
+    <!-- List of Subscription Plans [TWO VALUES] -->
+	<cache name="subscriptionPlanService.findByFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="2" timeToIdleSeconds="86400" />   
+  	
+    <!-- Default User [SINGLE VALUE] -->
+	<cache name="userService.getCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="1" timeToIdleSeconds="86400" />
+   
+    <!-- Preferences for Users [UNIQUE TRACKTACULAR USERS PER DAY] -->
+	<cache name="preferencesService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+        
+    <!-- Subscriptions for Users [UNIQUE TRACKTACULAR USERS PER DAY] -->
+	<cache name="subscriptionService.findByFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+        
+    <!-- Blog Entries [UNIQUE BLOG ENTRIES] -->
+	<cache name="blogEntryService.getCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="100" timeToIdleSeconds="86400" />
+   
+    <!-- Blog Categories [UNIQUE BLOG ENTRIES] -->
+	<cache name="blogCategoryService.findByFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+   
+   
+    <!--
+	
+     
+     	Birthday Tracker Caches
+     
+     	     	  	
+     -->
+	  
+	  	 
+	<!-- Birthday lists for Users [UNIQUE BIRTHDAY TRACKER USERS PER DAY] -->
+	<cache name="birthday_birthdayService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Birthday count for Users [UNIQUE BIRTHDAY TRACKER USERS PER DAY] -->
+	<cache name="birthday_birthdayService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+            
+    <!--
+	
+     
+     	Blood Tracker Caches
+     
+     	     	  	
+     -->
+	  
+	  	 
+	<!-- Blood Pressure lists for Users [UNIQUE BLOOD TRACKER USERS PER DAY] -->
+	<cache name="blood_bloodPressureService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Blood Pressure count for Users [UNIQUE BLOOD TRACKER USERS PER DAY] -->
+	<cache name="blood_bloodPressureService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+  
+    <!--
+	
+     
+     	Body Tracker Caches
+     
+     	     	  	
+     -->
+	  
+	  	 
+	<!-- Body lists for Users [UNIQUE BODY TRACKER USERS PER DAY] -->
+	<cache name="body_bodyService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Body count for Users [UNIQUE BODY TRACKER USERS PER DAY] -->
+	<cache name="body_bodyService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+        
+     
+    <!--
+	
+     
+     	Book Tracker Caches
+     
+     	     	  	
+     -->
+	  
+	  	 
+	<!-- Book lists for Users [UNIQUE BOOK TRACKER USERS PER DAY] -->
+	<cache name="book_bookService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Book count for Users [UNIQUE BOOK TRACKER USERS PER DAY] -->
+	<cache name="book_bookService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+  
+    <!--
+	
+     
+     	Bucket Tracker Caches
+     
+     	     	  	
+     -->
+	  
+	  	 
+	<!-- Bucket lists for Users [UNIQUE BUCKET TRACKER USERS PER DAY] -->
+	<cache name="bucket_itemService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Bucket count for Users [UNIQUE BUCKET TRACKER USERS PER DAY] -->
+	<cache name="bucket_itemService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+            
+    <!--
+	
+     
+     	Budget Tracker Caches
+     
+     	     	  	
+     -->
+	  
+	  	 
+	<!-- Budget lists for Users [UNIQUE BUDGET TRACKER USERS PER DAY] -->
+	<cache name="budget_budgetService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Budget count for Users [UNIQUE BUDGET TRACKER USERS PER DAY] -->
+	<cache name="budget_budgetService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+            
+    <!--
+	
+     
+     	Calendar Tracker Caches
+     
+     	     	  	
+     -->
+	  
+	  	 
+	<!-- CalendarEntry lists for Users [UNIQUE CALENDAR TRACKER USERS PER DAY] -->
+	<cache name="calendar_calendarEntryService.findWithinIntervalCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- CalendarEntry lists for Users [UNIQUE CALENDAR TRACKER USERS PER DAY] -->
+	<cache name="calendar_calendarEntryService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+  	<!-- CalendarEntry count for Users [UNIQUE CALENDAR TRACKER USERS PER DAY] -->
+	<cache name="calendar_calendarEntryService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+            
+    <!--
+	
+     
+     	Cholesterol Tracker Caches
+     
+     	     	  	
+     -->
+	  
+	  	 
+	<!-- Cholesterol lists for Users [UNIQUE CHOLESTEROL TRACKER USERS PER DAY] -->
+	<cache name="cholesterol_cholesterolService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Cholesterol count for Users [UNIQUE CHOLESTEROL TRACKER USERS PER DAY] -->
+	<cache name="cholesterol_cholesterolService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+            
+	<!--
+	
+     
+     	Dream Tracker Caches
+     
+     	     	  	
+     -->
+	  
+	  	 
+	<!-- Dream lists for Users [UNIQUE DREAM TRACKER USERS PER DAY] -->
+	<cache name="dream_dreamService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Dream count for Users [UNIQUE DREAM TRACKER USERS PER DAY] -->
+	<cache name="dream_dreamService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+        
+    <!-- Dream Tracker Report for Users [UNIQUE DREAM TRACKER USERS PER DAY] -->
+	<cache name="dream_dreamService.getDreamTrackerReportCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  	
+	<!-- Dreamsign frequencies for Users [UNIQUE DREAM TRACKER USERS PER DAY] -->
+	<cache name="dream_dreamsignService.findTagFrequenciesByUserCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Dreamsign frequency count for Users [UNIQUE DREAM TRACKER USERS PER DAY] -->
+	<cache name="dream_dreamsignService.findTagFrequencyCountByUserCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+  	<!-- Dreamsign lists for Users [UNIQUE DREAM TRACKER USERS PER DAY] -->
+	<cache name="dream_dreamsignService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Dreamsign count for Users [UNIQUE DREAM TRACKER USERS PER DAY] -->
+	<cache name="dream_dreamsignService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+	
+    <!--
+	
+     
+     	Game Tracker Caches
+     
+     	     	  	
+     -->
+	  
+	  	 
+	<!-- Game lists for Users [UNIQUE GAME TRACKER USERS PER DAY] -->
+	<cache name="game_gameService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Game count for Users [UNIQUE GAME TRACKER USERS PER DAY] -->
+	<cache name="game_gameService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+  
+    <!--
+	
+     
+     	Gift Tracker Caches
+     
+     	     	  	
+     -->
+	  
+	  	 
+	<!-- Gift lists for Users [UNIQUE GIFT TRACKER USERS PER DAY] -->
+	<cache name="gift_giftService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Gift count for Users [UNIQUE GIFT TRACKER USERS PER DAY] -->
+	<cache name="gift_giftService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+	
+    <!--
+	
+     
+     	Goal Tracker Caches
+     
+     	     	  	
+     -->
+	  
+	  	 
+	<!-- Goal lists for Users [UNIQUE GOAL TRACKER USERS PER DAY] -->
+	<cache name="goal_goalService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Goal count for Users [UNIQUE GOAL TRACKER USERS PER DAY] -->
+	<cache name="goal_goalService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+	
+    <!--
+	
+     
+     	Exercise Tracker Caches
+     
+     	     	  	
+     -->
+	  
+	  	 
+	<!-- Routine lists for Users [UNIQUE EXERCISE TRACKER USERS PER DAY] -->
+	<cache name="exercise_routineService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Routine count for Users [UNIQUE EXERCISE TRACKER USERS PER DAY] -->
+	<cache name="exercise_routineService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  	
+    <!-- Workout lists for Users [UNIQUE EXERCISE TRACKER USERS PER DAY] -->
+	<cache name="exercise_workoutService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Workout entry count for Users [UNIQUE EXERCISE TRACKER USERS PER DAY] -->
+	<cache name="exercise_workoutService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    	 
+    <!--
+	
+     
+     	Journal Tracker Caches
+     
+     	     	  	
+     -->
+	  
+	  	 
+	<!-- Journal lists for Users [UNIQUE JOURNAL TRACKER USERS PER DAY] -->
+	<cache name="journal_journalService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Journal count for Users [UNIQUE JOURNAL TRACKER USERS PER DAY] -->
+	<cache name="journal_journalService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!--Journal Entry lists for Users [UNIQUE JOURNAL TRACKER USERS PER DAY] -->
+	<cache name="journal_entryService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Journal entry count for Users [UNIQUE JOURNAL TRACKER USERS PER DAY] -->
+	<cache name="journal_entryService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    	 
+    <!--
+	
+     
+     	Movie Tracker Caches
+     
+     	     	  	
+     -->
+	  
+	  	 
+	<!-- Movie lists for Users [UNIQUE MOVIE TRACKER USERS PER DAY] -->
+	<cache name="movie_movieService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Movie count for Users [UNIQUE MOVIE TRACKER USERS PER DAY] -->
+	<cache name="movie_movieService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+  
+    <!--
+	
+     
+     	Music Tracker Caches
+     
+     	     	  	
+     -->
+	  
+	  	 
+	<!-- Song lists for Users [UNIQUE MUSIC TRACKER USERS PER DAY] -->
+	<cache name="music_songService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Song count for Users [UNIQUE MUSIC TRACKER USERS PER DAY] -->
+	<cache name="music_songService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+  <!-- Album lists for Users [UNIQUE MUSIC TRACKER USERS PER DAY] -->
+	<cache name="music_albumService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Album count for Users [UNIQUE MUSIC TRACKER USERS PER DAY] -->
+	<cache name="music_albumService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+  
+    <!--
+	
+     
+     	Recipe Tracker Caches
+     
+     	     	  	
+     -->
+	     
+     
+    <!-- Recipe Chapter lists for Users [UNIQUE RECIPE TRACKER USERS PER DAY] -->
+	<cache name="recipe_recipeChapterService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Recipe lists for Users [UNIQUE RECIPE TRACKER USERS PER DAY] -->
+	<cache name="recipe_recipeService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Recipe count for Users [UNIQUE RECIPE TRACKER USERS PER DAY] -->
+	<cache name="recipe_recipeService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+
+   <!-- RecipeTag frequencies for Users [UNIQUE RECIPE TRACKER USERS PER DAY] -->
+	<cache name="recipe_recipeTagService.findTagFrequenciesByUserCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- RecipeTag frequency count for Users [UNIQUE RECIPE TRACKER USERS PER DAY] -->
+	<cache name="recipe_recipeTagService.findTagFrequencyCountByUserCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+  	<!-- RecipeTag lists for Users [UNIQUE RECIPE TRACKER USERS PER DAY] -->
+	<cache name="recipe_recipeTagService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- RecipeTag count for Users [UNIQUE RECIPE TRACKER USERS PER DAY] -->
+	<cache name="recipe_recipeTagService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+        
+        
+    <!--
+	
+     
+     	Restaurant Tracker Caches
+     
+     	     	  	
+     -->
+	  
+	  	 
+	<!-- Restaurant lists for Users [UNIQUE RESTAURANT TRACKER USERS PER DAY] -->
+	<cache name="restaurant_restaurantService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Restaurant count for Users [UNIQUE RESTAURANT TRACKER USERS PER DAY] -->
+	<cache name="restaurant_restaurantService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+  
+    <!--
+	
+     
+     	Task Tracker Caches
+     
+     	     	  	
+     -->
+	     
+     
+    <!-- Task Category lists for Users [UNIQUE TASK TRACKER USERS PER DAY] -->
+	<cache name="task_taskCategoryService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Task lists for Users [UNIQUE TASK TRACKER USERS PER DAY] -->
+	<cache name="task_taskService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Task count for Users [UNIQUE TASK TRACKER USERS PER DAY] -->
+	<cache name="task_taskService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+        
+    <!-- TaskReportCompleted for Users [UNIQUE TASK TRACKER USERS PER DAY] -->
+	<cache name="task_taskService.getTaskReportCompletedCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+    
+    
+    <!--
+	
+     
+     	Tv Tracker Caches
+     
+     	     	  	
+     -->
+	  
+	  	 
+	<!-- Show lists for Users [UNIQUE TV TRACKER USERS PER DAY] -->
+	<cache name="tv_showService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Show count for Users [UNIQUE TV TRACKER USERS PER DAY] -->
+	<cache name="tv_showService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+    
+    
+    <!--
+	
+     
+     	Wish Tracker Caches
+     
+     	     	  	
+     -->
+	  
+	  	 
+	<!-- Wish lists for Users [UNIQUE WISH TRACKER USERS PER DAY] -->
+	<cache name="wish_itemService.findByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+    <!-- Wish count for Users [UNIQUE WISH TRACKER USERS PER DAY] -->
+	<cache name="wish_itemService.findCountByUserFindCriteriaCache" 
+		eternal="false" overflowToDisk="false" memoryStoreEvictionPolicy="LRU"
+        maxElementsInMemory="25" timeToIdleSeconds="86400" />
+  
+       
+</ehcache>

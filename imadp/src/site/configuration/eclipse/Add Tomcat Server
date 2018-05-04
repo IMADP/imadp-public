@@ -1,0 +1,12 @@
+  =================================================================================================
+  
+   Add Tomcat Server                                    
+   
+  =================================================================================================
+ 
+  	- Servers > New > Server
+  	- Apache > Tomcat vX > Finish
+    - If the server requires bootstrap jars, double click Server
+    - Change port from 8080 to 80
+    - Open Launch Configuration > Classpath > Add External Jars
+      (May need MySQL Connector, C3P0)

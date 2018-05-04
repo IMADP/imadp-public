@@ -1,0 +1,20 @@
+  =================================================================================================
+  
+   Project Architecture                                          
+   
+  =================================================================================================
+ 
+    All project structure should follow a similar, consistent hierarchy, divided into service and
+    ui layers. Using a ficticious application named Example, the following projects may be created:
+    
+    Example
+    ExampleService
+    ExampleWeb
+    
+    Example - Contains all manner of documentation.
+    
+    ExampleService - The parent service project providing either service implementations or
+    reusable components for child services. Contains the spring context configuration and related tests.
+          
+    ExampleWeb - The entry point for the web application. References the ExampleService project, contains
+    web pages and client code, as well as the web Spring context configuration.

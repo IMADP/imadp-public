@@ -1,0 +1,101 @@
+<groups xmlns="http://www.isdc.ro/wro">
+
+	<group name="page-${version.page}">
+		<css>/static/tracktacular/css/all/**</css>
+		<css>/static/tracktacular/css/page/**</css>
+		<js>/static/tracktacular/js/all/**</js>
+		<js>/static/tracktacular/js/page/**</js>
+	</group>
+
+	<group name="page.mobile-${version.page.mobile}">
+		<css>/static/tracktacular/css/all/**</css>
+		<css>/static/tracktacular/css/page.mobile/**</css>
+		<js>/static/tracktacular/js/all/**</js>
+		<js>/static/tracktacular/js/page.mobile/**</js>
+	</group>
+
+	<group name="page.tracker.birthday-${version.page.tracker.birthday}">
+		<js>/static/tracktacular/js/page.tracker.birthday/**</js>
+	</group>
+	
+	<group name="page.tracker.blood-${version.page.tracker.blood}">
+		<js>/static/tracktacular/js/page.tracker.blood/**</js>
+	</group>
+	
+	<group name="page.tracker.book-${version.page.tracker.book}">
+		<js>/static/tracktacular/js/page.tracker.book/**</js>
+	</group>
+	
+	<group name="page.tracker.body-${version.page.tracker.body}">
+		<js>/static/tracktacular/js/page.tracker.body/**</js>
+	</group>
+	
+	<group name="page.tracker.bucket-${version.page.tracker.bucket}">
+		<js>/static/tracktacular/js/page.tracker.bucket/**</js>
+	</group>
+	
+	<group name="page.tracker.budget-${version.page.tracker.budget}">
+		<js>/static/tracktacular/js/page.tracker.budget/**</js>
+	</group>
+	
+	<group name="page.tracker.dream-${version.page.tracker.dream}">
+		<js>/static/tracktacular/js/page.tracker.dream/**</js>
+	</group>
+	
+	<group name="page.tracker.calendar-${version.page.tracker.calendar}">
+		<js>/static/tracktacular/js/page.tracker.calendar/**</js>
+	</group>
+	
+	<group name="page.tracker.cholesterol-${version.page.tracker.cholesterol}">
+		<js>/static/tracktacular/js/page.tracker.cholesterol/**</js>
+	</group>
+	
+	<group name="page.tracker.game-${version.page.tracker.game}">
+		<js>/static/tracktacular/js/page.tracker.game/**</js>
+	</group>
+	
+	<group name="page.tracker.gift-${version.page.tracker.gift}">
+		<js>/static/tracktacular/js/page.tracker.gift/**</js>
+	</group>
+	
+	<group name="page.tracker.goal-${version.page.tracker.goal}">
+		<js>/static/tracktacular/js/page.tracker.goal/**</js>
+	</group>
+	
+	<group name="page.tracker.exercise-${version.page.tracker.exercise}">
+		<js>/static/tracktacular/js/page.tracker.exercise/**</js>
+	</group>
+	
+	<group name="page.tracker.journal-${version.page.tracker.journal}">
+		<js>/static/tracktacular/js/page.tracker.journal/**</js>
+	</group>
+	
+	<group name="page.tracker.movie-${version.page.tracker.movie}">
+		<js>/static/tracktacular/js/page.tracker.movie/**</js>
+	</group>
+	
+	<group name="page.tracker.music-${version.page.tracker.music}">
+		<js>/static/tracktacular/js/page.tracker.music/**</js>
+	</group>
+	
+	<group name="page.tracker.recipe-${version.page.tracker.recipe}">
+		<js>/static/tracktacular/js/page.tracker.recipe/**</js>
+	</group>
+	
+	<group name="page.tracker.restaurant-${version.page.tracker.restaurant}">
+		<js>/static/tracktacular/js/page.tracker.restaurant/**</js>
+	</group>
+	
+	<group name="page.tracker.task-${version.page.tracker.task}">
+		<js>/static/tracktacular/js/page.tracker.task/**</js>
+	</group>
+	
+	<group name="page.tracker.tv-${version.page.tracker.tv}">
+		<js>/static/tracktacular/js/page.tracker.tv/**</js>
+	</group>
+	
+	<group name="page.tracker.wish-${version.page.tracker.wish}">
+		<js>/static/tracktacular/js/page.tracker.wish/**</js>
+	</group>
+	
+</groups>

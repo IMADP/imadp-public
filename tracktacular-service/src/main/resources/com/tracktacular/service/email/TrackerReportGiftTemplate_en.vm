@@ -1,0 +1,30 @@
+<table width="100%" cellpadding="10" style="border: 1px solid #C0C0C0;">
+
+	<tr>
+		<td style="font-size: large; font-weight: bold;" align="left" bgcolor="#C6D5DF">Gifts Report</td>
+	</tr>
+	
+	#if(!$trackerReport.enabled)
+		<tr>
+			<td>
+			   You have no given or received gifts.     
+			</td>
+		</tr>
+	#else
+		<tr cellpadding="5">
+			<td align="left" bgcolor="#e3eaf0">
+			    $trackerReport.givenGiftCount #if($trackerReport.givenGiftCount == 1) Gift #else Gifts #end Given and
+				$trackerReport.receivedGiftCount #if($trackerReport.receivedGiftCount == 1) Gift #else Gifts #end Received	
+			</td>
+		</tr>
+		<tr>
+			<td>
+			   <a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-gift/given/by-occasion">Given On Occasion</a>
+			   <a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-gift/given/by-receiver">Given To Receiver</a>
+			   <a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-gift/received/by-occasion">Received On Occasion</a>
+			   <a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-gift/received/by-sender">Received By Sender</a>
+			 </td>
+		</tr>
+	#end
+	
+</table>	

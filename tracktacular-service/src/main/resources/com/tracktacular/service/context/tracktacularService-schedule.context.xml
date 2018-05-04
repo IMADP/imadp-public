@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+  -
+  - Scheduler context definition to assign scheduled tasks
+  -
+  -->
+<beans>
+	
+	
+	<!-- Jobs -->
+	<bean id="adminFacadeGenerateAndSendStatusReportJob" 
+	class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="adminFacade" />
+		<property name="targetMethod">
+			<value>generateAndSendStatusReport</value>
+		</property>
+	</bean>
+	
+	<bean id="adminFacadeGenerateAndSendTracktacularReportsJob" 
+	class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="adminFacade" />
+		<property name="targetMethod">
+			<value>generateAndSendTracktacularReports</value>
+		</property>
+	</bean>	
+	
+	<bean id="adminFacadeInsertTrackerDemoDataJob" 
+	class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="adminFacade" />
+		<property name="targetMethod">
+			<value>insertTrackerDemoData</value>
+		</property>
+	</bean>
+	
+	<bean id="adminFacadeSynchronizeSteamGamesJob" 
+	class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="adminFacade" />
+		<property name="targetMethod">
+			<value>synchronizeSteamGames</value>
+		</property>
+	</bean>
+	
+
+	<!-- Triggers -->
+	<bean id="cronTriggerBean" abstract="true" 
+	class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="timeZone" ref="timeZone" />		
+	</bean>
+	
+	<bean id="adminFacadeGenerateAndSendStatusReportJobTrigger" parent="cronTriggerBean">
+		<property name="jobDetail" ref="adminFacadeGenerateAndSendStatusReportJob" />
+		<property name="cronExpression">
+			<value>${adminFacadeGenerateAndSendStatusReportJobTrigger.cronExpression}</value>
+		</property>
+	</bean>	 
+	
+	<bean id="adminFacadeGenerateAndSendTracktacularReportsJobTrigger" parent="cronTriggerBean">
+		<property name="jobDetail" ref="adminFacadeGenerateAndSendTracktacularReportsJob" />
+		<property name="cronExpression">
+			<value>${adminFacadeGenerateAndSendTracktacularReportsJobTrigger.cronExpression}</value>
+		</property>
+	</bean>	 
+	 
+	<bean id="adminFacadeInsertTrackerDemoDataJobTrigger" parent="cronTriggerBean">
+		<property name="jobDetail" ref="adminFacadeInsertTrackerDemoDataJob" />
+		<property name="cronExpression">
+			<value>${adminFacadeInsertTrackerDemoDataJobTrigger.cronExpression}</value>
+		</property>
+	</bean>	 
+	 
+	<bean id="adminFacadeSynchronizeSteamGamesJobTrigger" parent="cronTriggerBean">
+		<property name="jobDetail" ref="adminFacadeSynchronizeSteamGamesJob" />
+		<property name="cronExpression">
+			<value>${adminFacadeSynchronizeSteamGamesJobTrigger.cronExpression}</value>
+		</property>
+	</bean>	 
+	 
+	 
+	<!-- Schedulers --> 
+	<bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false">
+		<property name="triggers">
+			<list>
+				<ref bean="adminFacadeGenerateAndSendStatusReportJobTrigger" />	
+				<ref bean="adminFacadeGenerateAndSendTracktacularReportsJobTrigger" />	
+				<ref bean="adminFacadeInsertTrackerDemoDataJobTrigger" />		
+				<ref bean="adminFacadeSynchronizeSteamGamesJobTrigger" />	
+			</list>
+		</property>
+	</bean>	
+	 
+	 
+</beans>

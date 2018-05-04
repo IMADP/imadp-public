@@ -1,0 +1,77 @@
+<table width="100%" cellpadding="10" style="border: 1px solid #C0C0C0;">
+
+	<tr>
+		<td style="font-size: large; font-weight: bold;" align="left" bgcolor="#C6D5DF">Birthdays Report</td>
+	</tr>
+	
+	#if(!$trackerReport.enabled)
+		<tr>
+			<td>
+			   You have no upcoming birthdays.  
+			</td>
+		</tr>
+	#else
+		<tr cellpadding="5">
+			<td align="left" bgcolor="#e3eaf0">
+			   $trackerReport.upcomingBirthdayCount Upcoming #if($trackerReport.upcomingBirthdayCount == 1) Birthday #else Birthdays #end in 
+			   $dateTool.format('MMMM', $trackerReport.currentMonth.millis) & $dateTool.format('MMMM', $trackerReport.nextMonth.millis) 
+			</td>
+		</tr>
+		
+		#foreach($birthday in $trackerReport.currentBirthdays )
+	        <tr cellpadding="5">
+				<td align="left" bgcolor="#FFCBCB">
+				   ${birthday.fullName} turned ${birthday.age} today!
+				</td>
+			</tr>
+        #end
+		
+		#foreach($birthday in $trackerReport.alertedBirthdays )
+	        <tr cellpadding="5">
+				<td align="left" bgcolor="#FFCBCB">
+				   ${birthday.fullName} turns ${birthday.age} in				   
+				  
+				    #if(${birthday.alertRecurrence.type} == "DAY")
+						 #if(${birthday.alertRecurrence.length} == 1) ${birthday.alertRecurrence.length} day #else ${birthday.alertRecurrence.length} days #end
+					#end
+				
+					#if(${birthday.alertRecurrence.type} == "WEEK")
+						#if(${birthday.alertRecurrence.length} == 1) ${birthday.alertRecurrence.length} week #else ${birthday.alertRecurrence.length} weeks #end
+					#end
+				
+					#if(${birthday.alertRecurrence.type} == "MONTH")
+						#if(${birthday.alertRecurrence.length} == 1) ${birthday.alertRecurrence.length} month #else ${birthday.alertRecurrence.length} months #end
+					#end
+				
+					#if(${birthday.alertRecurrence.type} == "YEAR")
+						#if(${birthday.alertRecurrence.length} == 1) ${birthday.alertRecurrence.length} year #else ${birthday.alertRecurrence.length} years #end
+					#end
+				   
+				</td>
+			</tr>
+        #end
+		
+		<tr>
+			<td>
+			   <table align="center">
+			   		#foreach($birthday in $trackerReport.upcomingBirthdays )
+		 				<tr>
+		 					<td>
+		 						<b>$birthday.fullName</b> 
+		 					</td>
+		 				</tr>
+		 				<tr>
+		 					<td>
+		 						$birthday.ageOrdinal Birthday on $dateTool.format('EEEE, MMMM d, yyyy', $birthday.nextBirthday.millis)
+		 					</td>
+		 				</tr>
+		 				<tr>
+		 					<td><br/></td>
+		 				</tr>
+					#end
+			   </table> 
+			</td>
+		</tr>
+	#end
+	
+</table>	

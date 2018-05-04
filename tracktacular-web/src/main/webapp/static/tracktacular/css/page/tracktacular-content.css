@@ -1,0 +1,170 @@
+ /*
+ * Content
+ *
+ */ 
+ 
+#content {
+	float:right;
+	width:788px;
+	padding:0 0 100px;
+	background-color: white;
+}
+
+#content a {
+	color: #00E;
+}
+
+#content a.active {
+	color:green;
+	text-decoration:underline;
+}
+
+#content .heading {
+	overflow:hidden;
+	background:#9ebfd5 url(/static/tracktacular/img/page/bg-heading.gif) no-repeat 1px 0;
+	padding:2px 0 0;
+	position:relative;
+}
+
+#content .heading .holder {
+	overflow:hidden;
+	background: #9ebfd5;
+	padding:10px 8px 15px 27px;
+	background: -moz-linear-gradient(top, #9ebfd5 0%, #8199a9 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#9ebfd5), color-stop(100%,#8199a9));
+	background: -webkit-linear-gradient(top, #9ebfd5 0%,#8199a9 100%);
+	background: -o-linear-gradient(top, #9ebfd5 0%,#8199a9 100%);
+	background: -ms-linear-gradient(top, #9ebfd5 0%,#8199a9 100%);
+	background: linear-gradient(top, #9ebfd5 0%,#8199a9 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9ebfd5', endColorstr='#8199a9',GradientType=0 );
+}
+ 
+#content .container .heading {
+	border:solid #e2e3e4;
+	border-width:1px 0;
+	padding:1px 0;
+	background:#fff;
+	margin:0 -50px 0 -41px;
+}
+
+#content-body nav {
+	margin: 25px 35px 0 35px;
+}
+
+ /*
+ * Content Navigation
+ *
+ */
+#content #nav {
+	float:right;
+	font-size:13px;
+	line-height:22px;
+	font-weight:bold;
+	text-shadow:0 1px 0 #6b7f8e;
+	padding:4px 0 0;
+}
+
+#content #nav ul {
+	float:right;
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+
+#content #nav ul li {
+	float:left;
+	background:url(/static/tracktacular/img/page/separator2.gif) no-repeat 0 1px;
+	position:relative;
+	padding:0 9px 0 9px;
+}
+
+#content #nav ul li:first-child {
+	background:none;
+}
+
+#content #nav ul a {
+	color:#fff;
+	float:left;
+	padding:0 8px;
+	position:relative;
+}
+
+#content #nav ul span {
+	color:#746E6E;;
+	text-shadow: none;
+}
+
+#content #nav ul .active a,
+#content #nav ul li.hover a:hover {
+	background:#fff;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	box-shadow:0 0 10px #7992a2;
+	-webkit-box-shadow:0 0 10px #7992a2;
+	-moz-box-shadow:0 0 10px #7992a2;
+	color:#5c5d5d;
+	text-shadow:none;
+	text-decoration:none;
+}
+
+#content #nav ul .arrow {
+	background:url(/static/tracktacular/img/page/arrow.png) no-repeat;
+	width:25px;
+	height:7px;
+	position:absolute;
+	bottom:-7px;
+	left:50%;
+	margin:0 0 0 -12px;
+	text-indent:-9999px;
+	overflow:hidden;
+	display:none;
+}
+
+#content #nav ul .active .arrow,
+#content #nav ul a:hover .arrow {
+	display:block;
+}
+ 
+/*
+ * Page Navigator
+ *
+ */ 
+#content .page-navigator {
+	padding:10px; 
+	margin: 40px 60px 0 60px; 
+	background:#F2F2F2;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 16px;
+}	
+
+#content .page-navigator div span {
+	color: grey;
+	padding:0 5px;
+}
+
+#content .page-navigator div a {
+	color: #1171B0;
+	padding:0 5px;
+}
+
+#content .page-navigator div a:hover {
+	text-decoration: underline;
+}
+
+#content .page-navigator div.controls {
+	width:142px;
+}
+
+#content .page-navigator div.links {
+	width:360px;
+}
+
+.content-body-header h4 {
+	padding-top: 5px; 
+	padding-left:60px;
+}
+
+.content-body-header div.right {
+	margin: 20px 60px -10px 0;
+}

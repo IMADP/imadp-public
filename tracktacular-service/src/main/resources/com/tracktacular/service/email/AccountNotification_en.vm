@@ -1,0 +1,15 @@
+#set($subject = "New Tracktacular account: ${account.credentialsUsername.username}")
+#set($from = "webmaster@tracktacular.com")
+#set($fromAlias = "Tracktacular")
+
+#parse("AbstractEmailHeader_en.vm")
+
+	#set($title = "${account.credentialsUsername.username} has just signed up" )
+	
+	#contentStart($title)
+	
+		A new user <strong>${account.credentialsUsername.username}</strong> has signed up from ${account.credentialsEmail.email}.
+						
+	#contentEnd
+
+#parse("AbstractEmailFooter_en.vm")

@@ -1,0 +1,23 @@
+  =================================================================================================
+  
+   Core Components                                         
+   
+  =================================================================================================
+ 
+    A core component is defined as a highly cohesive and reusable component for multiple
+    applications. Core components are generally prefixed with IMADPCore, followed by a descriptive
+    name regarding its function. In general, core components are comprised of an interface which
+    defines the API, custom exceptions, and one to several default implementations.
+    
+    Core components must not refer to any project that is not in the IMADPCore layer. In the event
+    that different implementations have different dependencies, the projects should be
+    separated to minimize unnecessary dependency pulls. However if multiple implementations do not
+    require additional dependencies, its generally better to keep them in the same project to 
+    minimize the total number of workspace projects.
+    
+    Components are generally managed by spring via the lifecycle hook methods init() and destroy().
+    It is a good practice to use Apache Commons Validate methods to ensure dependencies are 
+    properly injected. Components should extend CoreComponent found in IMADPCore to provide these
+    methods and other common functions.
+    
+    Finally, components should be unit tested as thoroughly as possible.

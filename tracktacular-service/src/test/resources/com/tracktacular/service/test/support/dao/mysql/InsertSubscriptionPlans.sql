@@ -1,0 +1,2 @@
+INSERT INTO `account_subscription_plans` (`id`, `version`, `uid`, `time_created`, `time_modified`, `persistable_state_date`, `persistable_state`, `subscription_id`) VALUES 
+	(1, 1, 'kNImuIDpRpG0ax9NmdGjsg', 1371345848422, 1371345848422, NULL, NULL, 'member_monthly');

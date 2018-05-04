@@ -1,0 +1,85 @@
+<table width="100%" cellpadding="10" style="border: 1px solid #C0C0C0;">
+
+	<tr>
+		<td style="font-size: large; font-weight: bold;" align="left" bgcolor="#C6D5DF">Tasks Report</td>
+	</tr>
+	
+	#if(!$trackerReport.enabled)
+		<tr>
+			<td>
+			   You have no tasks.  
+			</td>
+		</tr>
+	#else
+		<tr cellpadding="5">
+			<td align="left" bgcolor="#e3eaf0">
+			   $trackerReport.taskCount #if($trackerReport.taskCount == 1) Task #else Tasks #end in $trackerReport.rootCategoriesCount
+			   #if($trackerReport.rootCategoriesCount == 1) Category #else Categories #end
+			</td>
+		</tr>
+		
+		#foreach($task in $trackerReport.lateTasks)
+	        <tr cellpadding="5">
+				<td align="left" bgcolor="#FFCBCB">
+				 	Task <i>${task.name}</i> hasn't been completed!
+				</td>
+			</tr>
+        #end
+		
+		<tr>
+			<td>
+				#foreach($category in $trackerReport.rootCategories )
+		 			<a href="https://www.tracktacular.com/user-${tracktacularReport.username}/tracker-task/tasks/task-$category.uid">$category.name</a>
+			  	#end
+			</td>
+		</tr>
+		
+		#if($trackerReport.highPriorityTasksCount > 0)
+			<tr>
+				<td>
+					<b>
+						$trackerReport.highPriorityTasksCount High Priority #if($trackerReport.highPriorityTasksCount == 1) Task #else Tasks #end
+					</b>
+				</td>
+			</tr>
+			
+			#foreach($task in $trackerReport.highPriorityTasks)
+	 			<tr>
+					<td>
+						$task.name <br/>
+						<i>$task.category.path</i>
+						#if($task.targetDate)
+							<br/>$dateTool.format('MMM d, yyyy', $task.targetDate.millis)	
+						#end	
+					</td>
+				</tr>
+			#end
+			
+		#end
+		
+		#if($trackerReport.lateTasksCount > 0)
+			<tr>
+				<td>
+					<b>
+						$trackerReport.lateTasksCount Late #if($trackerReport.lateTasksCount == 1) Task #else Tasks #end
+					</b>
+				</td>
+			</tr>
+			
+			#foreach($task in $trackerReport.lateTasks)
+	 			<tr>
+					<td>
+						$task.name <br/>
+						<i>$task.category.path</i>
+						#if($task.targetDate)
+							<br/>$dateTool.format('MMM d, yyyy', $task.targetDate.millis)	
+						#end	
+					</td>
+				</tr>
+			#end
+			
+		#end
+		
+	#end
+	
+</table>	

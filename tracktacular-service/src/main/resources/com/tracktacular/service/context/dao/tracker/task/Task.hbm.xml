@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    
+   <typedef name="encryptedString" class="org.jasypt.hibernate.type.EncryptedStringType">
+       <param name="encryptorRegisteredName">hibernateStringEncryptor</param>
+   </typedef>
+    
+   <class name="com.tracktacular.service.tracker.task.Task" table="tracker_task_tasks">
+	
+		<!-- Id -->
+    	<id name="id" column="id" type="long" unsaved-value="null">
+			<generator class="identity"/>
+		</id>
+		
+		
+		<!-- Version -->
+		<version name="version" column="version" unsaved-value="undefined" />
+		
+		
+		<!-- Global Properties -->
+		<property name="uid" column="uid" 
+		type="java.lang.String" length="36" unique="true" not-null="true" />
+		
+		<property name="timeCreated" column="time_created" 
+		type="long"	not-null="true" />
+		
+		<property name="timeModified" column="time_modified" 
+		type="long"	not-null="true" />
+		
+		<property name="persistableStateDate" column="persistable_state_date" 
+		type="org.joda.time.contrib.hibernate.PersistentDateTime" not-null="false" />
+		
+		<property name="persistableState" column="persistable_state" access="field"
+		length="10" not-null="false"> 
+			<type name="org.hibernate.type.EnumType"> 
+				<param name="enumClass">com.imadp.dao.PersistableState</param> 
+				<param name="type">12</param> 
+			</type> 
+		</property> 
+		
+		
+		<!-- Properties -->
+		<property name="name" column="name" 
+		length="1024" type="encryptedString" not-null="false" />
+		
+		<property name="notes" column="notes" 
+		length="100000" type="encryptedString" not-null="false" />
+
+		<property name="sort" column="sort" 
+		type="int" not-null="true" />
+		
+		<property name="categoryName" column="category_name" 
+		length="35" type="java.lang.String" not-null="false" />
+		
+		<property name="categoryPath" column="category_path" 
+		length="1024" type="java.lang.String" not-null="false" />
+
+		<property name="priority" column="priority"
+		length="15" not-null="true"> 
+			<type name="org.hibernate.type.EnumType"> 
+				<param name="enumClass">com.tracktacular.service.tracker.task.Task$TaskPriority</param> 
+				<param name="type">12</param> 
+			</type> 
+		</property> 
+		
+		<property name="prioritySort" column="priority_sort" 
+		type="integer" not-null="false" />
+		
+		<property name="targetDate" column="target_date" 
+		type="org.joda.time.contrib.hibernate.PersistentDateTime" not-null="false" />
+
+	
+		<!-- References -->
+		<many-to-one name="user" column="user_id" 
+		cascade="none" lazy="false" fetch="join" class="com.imadp.service.user.User" not-null="true" />
+						 		 		
+		<many-to-one name="category" column="category_id" 
+		cascade="none" lazy="false" fetch="join" class="com.tracktacular.service.tracker.task.TaskCategory" not-null="false" />
+			
+	    
+		<!-- Queries -->
+		<query name="getCompletedTaskSums">
+		<![CDATA[
+			SELECT
+				MONTH(task.persistableStateDate),
+				YEAR(task.persistableStateDate),
+				SUM(CASE WHEN task.priority = 'LOW' THEN 1 ELSE 0 END),
+				SUM(CASE WHEN task.priority = 'MEDIUM' THEN 1 ELSE 0 END),
+				SUM(CASE WHEN task.priority = 'HIGH' THEN 1 ELSE 0 END)
+			FROM	
+				com.tracktacular.service.tracker.task.Task task
+			WHERE
+				persistableStateDate >= :earliestCompletedDate
+			AND user = :user
+			AND task.persistableState = 'ARCHIVED'	
+			GROUP BY 
+				MONTH(task.persistableStateDate),
+				YEAR(task.persistableStateDate)
+			ORDER BY
+				YEAR(task.persistableStateDate) ASC,
+				MONTH(task.persistableStateDate) ASC				
+		]]>
+		</query>
+				
+							 		 		
+    </class>
+</hibernate-mapping>

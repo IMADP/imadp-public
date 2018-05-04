@@ -1,0 +1,1 @@
+	<input type="radio" id="{object}.{value}"name="{object}" value="{value}" {@checked object=object value=value}{/checked}/> {~s}

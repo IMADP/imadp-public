@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+  -
+  - IMADPCore context
+  -
+  - Defines components shared throughout the application.
+  -
+  -->
+  
+<beans>
+
+		
+	<!-- Core Component -->		
+	<bean id="coreComponent" abstract="true" init-method="init" destroy-method="destroy" />
+	
+	
+	<!-- Cache Manager -->		
+	<bean id="cacheManager" parent="coreComponent" 
+	class="com.imadp.core.cache.CacheManagerEhCacheImpl" >
+		<property name="ehCacheManager" ref="ehCacheManager"/>
+	</bean>
+	
+	
+	<!-- EhCache Manager -->		
+	<bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation">
+			<value>classpath:com/tracktacular/service/context/cache/EhCacheConfig.xml</value>
+		</property> 
+	</bean>
+	
+	
+	<!-- Cache Factory -->		
+	<bean id="cacheFactory" abstract="true" factory-bean="cacheManager" factory-method="getCache" />
+		
+		
+	<!-- Email Sender JavaMail -->
+	<bean name="emailSender" parent="coreComponent" 
+	class="com.imadp.core.email.EmailSenderJavaMailImpl">
+		<property name="mailSender">
+			<bean class="org.springframework.mail.javamail.JavaMailSenderImpl">
+				<property name="host">
+					<value>${emailSender.mailSender.host}</value>
+				</property>
+			</bean>	
+		</property>
+	</bean>
+	
+	
+ 	<!-- Template Engine Velocity -->		
+	<bean id="templateEngine" parent="coreComponent"
+	class="com.imadp.core.template.TemplateEngineVelocityImpl	">
+		<property name="velocityEngine">
+			<bean class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		      <property name="velocityProperties">
+		         <value>
+		            resource.loader=prefixed
+					prefixed.resource.loader.class=com.imadp.core.template.PrefixedClasspathResourceLoader
+					prefixed.resource.loader.prefix=com/tracktacular/service/email/
+		         </value>
+		      </property>
+		    </bean>
+ 	 	</property>
+	</bean>
+	
+	
+	<!-- Encryptor Jasypt -->
+	<bean id="stringEncryptor" class="org.jasypt.encryption.pbe.PooledPBEStringEncryptor">
+	    <property name="password">
+	        <value>${stringEncryptor.password}</value>
+	    </property>
+	    <property name="poolSize">
+	        <value>${stringEncryptor.poolSize}</value>
+	    </property>
+	    <property name="saltGenerator">
+			<bean class="org.jasypt.salt.FixedStringSaltGenerator">
+				<property name="salt">
+					<value>${stringEncryptor.saltGenerator.salt}</value>
+				</property>						
+			</bean>
+		</property>
+  	</bean>
+  
+	<bean id="encryptor" parent="coreComponent"
+	class="com.imadp.core.encryption.EncryptorJasyptImpl">
+		<property name="stringEncryptor" ref="stringEncryptor" />
+	</bean>	
+	
+	
+	<!-- Digestor Jasypt -->		
+	<bean id="digestorJasypt" parent="coreComponent"
+	class="com.imadp.core.encryption.DigestorJasyptImpl">
+		<property name="passwordEncryptor" ref="passwordEncryptor"/>
+	</bean>		
+	
+	
+	<!-- Password Encryption -->
+	<bean id="passwordEncryptor" class="org.jasypt.util.password.BasicPasswordEncryptor" />
+
+	<bean id="passwordEncoder" class="org.jasypt.spring.security3.PasswordEncoder">
+		<property name="passwordEncryptor" ref="passwordEncryptor" />
+	</bean>
+	
+			
+</beans>

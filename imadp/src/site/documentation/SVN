@@ -1,0 +1,16 @@
+  =================================================================================================
+  
+   SVN Notes                     
+   
+  =================================================================================================
+ 
+	o Ignoring resources
+		- Before they are in the repository, right click the file in Synchronize > Add to svn:ignore
+		- The following resources should be ignored:
+			- .project
+			- .settings
+			- .classpath
+			- /target
+     
+	o SVN Checkout
+		- Use svn checkout to export all files with the .svn folders removed

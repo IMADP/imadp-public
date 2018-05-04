@@ -1,0 +1,58 @@
+<table width="100%" cellpadding="10" style="border: 1px solid #C0C0C0;">
+
+	<tr>
+		<td style="font-size: large; font-weight: bold;" align="left" bgcolor="#C6D5DF">Cholesterol Report</td>
+	</tr>
+	
+	#if(!$trackerReport.enabled)
+		<tr>
+			<td>
+			   You have no cholesterol entries.   
+			</td>
+		</tr>
+	#else
+		<tr cellpadding="5">
+			<td align="left" bgcolor="#e3eaf0">
+			   Your Next Recommended Test Date is $dateTool.format('MMM d, yyyy', $trackerReport.recommendedTestDate.millis)	
+			</td>
+		</tr>
+		
+		#if($trackerReport.alerts)
+	        <tr cellpadding="5">
+				<td align="left" bgcolor="#FFCBCB">
+				   Your recommended test date is overdue!
+				</td>
+			</tr>
+        #end
+        
+		#if($trackerReport.cholesterol.ldlCholesterol)
+		<tr>
+			<td>
+			   <b>LDL Cholesterol:</b> $trackerReport.cholesterol.ldlCholesterol
+			</td>
+		</tr>
+		#end
+		#if($trackerReport.cholesterol.hdlCholesterol)
+		<tr>
+			<td>
+			   <b>HDL Cholesterol:</b> $trackerReport.cholesterol.hdlCholesterol
+			</td>
+		</tr>
+		#end
+		#if($trackerReport.cholesterol.triglycerides)
+		<tr>
+			<td>
+			   <b>Triglycerides:</b> $trackerReport.cholesterol.triglycerides
+			</td>
+		</tr>
+		#end
+		#if($trackerReport.cholesterol.totalCholesterol)
+		<tr>
+			<td>
+			   <b>Total Cholesterol:</b> $trackerReport.cholesterol.totalCholesterol
+			</td>
+		</tr>
+		#end
+	#end
+	
+</table>	

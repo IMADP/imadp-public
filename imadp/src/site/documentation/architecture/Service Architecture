@@ -1,0 +1,57 @@
+  =================================================================================================
+  
+   Service Architecture                                          
+   
+  =================================================================================================
+ 
+    Every service should extend ServiceComponent, or if the service is primarily retrieving 
+    persistable objects, it should extend PersistableServiceImpl/PersistableUserServiceImpl, 
+    depending on whether a User reference is present.
+    
+    The PersistableServiceImpl provides many services out of the box to simplify persistable object 
+    operations, such as common retrieval methods with configurable caching, as well as built in 
+    lifecycle hooks and utility methods for custom find operations and cache management.
+    
+    All services should be declared final classes, with a note in the class javadoc, unless they 
+    are specifically designed with inheritance in mind. The reason for this is to avoid the 
+    Fragile Base Class problem - many persistable services perform cache maintenance operations 
+    using the onSave and onDelete hooks. These methods are not final by nature, so if a subclass 
+    overrides them and forgets to call super, the integrity of the cache's are compromised. The 
+    safest solution is to declare all services final, and when the need to extend them arrives, 
+    remove the final modifier after ensuring that all methods can be safely overridden. For 
+    example, the onSave and onDelete methods containing cache maintentance code should be 
+    declared final, and additional hooks provided to subclasses. This is a more realistic solution 
+    than coding every service with inheritance in mind, as it is usually the case that most 
+    services will not need to be extended.
+    
+    Persistable services are primarily designed for straightforward and simple operations for front 
+    end coding. While a variety of retrieval operations are available by default, subclasses should
+    provide extended find operations when needed, or when cache can be handled more intelligently 
+    than the PersistableServiceImpl. Care must be taken to ensure that no referenced data is 
+    cached, for example, data that is not managed by the service itself. See CredentialsServiceImpl 
+    for an example. This is usually prevalent in any kind of method providing joined/referenced 
+    queries behind the scenes.
+    
+    When custom find operations are needed for a persistable service, the best approach is to 
+    adhere to the naming conventions described for the dao, with the consideration of how the
+    methods will be used by the front end. While the dao does not know whether one result is 
+    preferred over a list of results, the service can often make the decision to provide one 
+    or the other. When it is undetermined, the 'findFirst' naming convention should be used to 
+    differentiate.
+    
+    The customFindBy, customFindCountBy, and customFindFirstBy methods should be used for custom 
+    find operations, as they provide the IDynamicService support which may be necessary for any 
+    cacheable data. All services with custom caches must ensure that cache is correctly cleared 
+    or prepped on the onSave and onDelete hooks. Unit testing is highly advisable, as any caching 
+    maintenance problems are difficult to detect in practice. While custom cache maintenance 
+    requires more work and thought, the correct approach results in superior performance for the 
+    application in general, and thus the work is often worth the extra effort.
+    
+    User objects allow other objects to be owned, they contain no private data and are lightweight 
+    objects. Users can be identified via IP address, or username if preferred. It is better to 
+    create an anonymous User by IP address, rather than offering optional User references 
+    (not-null="false" in a hibernate mapping) to protect against legal issues (ie: tracking 
+    illegal behavior), than to make them optional. It may also be a legal obligation to mention 
+    storing IP addresses in your site's terms and conditions.
+    
+        

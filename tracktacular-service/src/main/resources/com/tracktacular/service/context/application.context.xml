@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+  -
+  - Application context
+  -
+  - The central point of entry for building an application context.
+  -
+  -->
+  
+<beans>
+
+
+	<!-- 
+		
+		Context Resources
+		
+	 -->
+	 
+	 
+	<import resource="classpath:/com/tracktacular/service/context/imadpCore.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/imadpService.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularService.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularService-schedule.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceBirthday.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceBlood.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceBody.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceBook.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceBucket.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceBudget.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceCalendar.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceCholesterol.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceDream.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceGame.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceGift.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceGoal.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceExercise.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceJournal.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceMovie.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceMusic.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceRecipe.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceRestaurant.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceTask.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceTv.context.xml"/>
+	<import resource="classpath:/com/tracktacular/service/context/tracktacularServiceWish.context.xml"/>
+			
+	
+	<!-- 
+	
+		Properties
+		
+	 -->
+	 
+	 
+	<bean id="propertyPlaceholderConfigurer" 
+	class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="false"/>
+		<property name="locations">
+	    	<list>
+	      		<value>classpath:/com/tracktacular/service/context/application.properties</value>
+	    		<value>classpath:/com/tracktacular/service/context/imadpCore.properties</value>
+	    		<value>classpath:/com/tracktacular/service/context/imadpService.properties</value>
+	    		<value>classpath:/com/tracktacular/service/context/tracktacularService.properties</value>
+	    		<value>classpath:/com/tracktacular/service/context/tracktacularService-schedule.properties</value>
+	    	</list>
+		</property>
+	</bean>
+	
+	
+	<!-- Time Zone -->
+	<bean id="timeZone" class="java.util.TimeZone" factory-method="getTimeZone">
+		<constructor-arg><value>${timeZone.constructor-arg}</value></constructor-arg>
+	</bean>
+			
+	
+</beans>

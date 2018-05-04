@@ -1,0 +1,43 @@
+
+/*
+ * Footer
+ *
+ */ 
+ 
+#footer {
+	overflow:hidden;
+	font-size:0.857em;
+	line-height:1.25em;
+	color:#597284;
+	padding:24px 0 40px;
+}
+
+#footer p {
+	margin:0 0 0 20px;
+}
+
+#footer .add-nav{
+	float:right;
+}
+
+#footer .add-nav ul {
+	padding:0 2px 0 0;
+	margin:0;
+	list-style:none;
+}
+
+#footer .add-nav li {
+	display:inline;
+	margin:0 0 0 5px;
+}
+
+#footer .add-nav li:after {
+	content: "|";
+	display: inline-block;
+	font-size: 100%;
+	margin: 0 0 0 .5em;
+}
+
+#footer .add-nav li:last-child:after { 
+	content: "";
+}

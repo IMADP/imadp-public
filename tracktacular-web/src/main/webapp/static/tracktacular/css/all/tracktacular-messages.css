@@ -1,0 +1,72 @@
+/*
+ * Messages
+ *
+ */
+.message-box {
+	margin: 40px 60px 0 60px;
+	overflow: hidden;
+	font-weight: bold;
+	border-radius: 5px;
+	padding: 5px 10px 5px 15px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.message-icon {
+	float:left;
+	width: 52px;
+	height: 52px;
+}
+
+.message-icon span {
+	margin: 10px;
+}
+
+.message-content {
+	float:left;
+	max-width: 500px;
+	padding: 15px 15px 15px 15px;
+}
+
+.message-close {
+	float:right;
+	width: 52px;
+	height: 52px;
+}
+
+.message-close a {
+	margin: 0 0 0 40px;
+}
+
+.message-success {
+	border: 1px solid #BED585 !important;
+	font-family: Arial,Helvetica,sans-serif !important;
+	background: #E3F5B3 !important;
+	color: #79923A !important;
+}
+
+.message-warn {
+	border: 1px solid #dfc269 !important;
+	font-family: Arial,Helvetica,sans-serif !important;
+	background:#fff6a7 !important;
+	color:#956f29 !important;
+}
+
+.message-info {
+	border: 1px solid #b3cadb !important;
+	font-family: Arial,Helvetica,sans-serif !important;
+	background:#dcebf7 !important;
+	color:#647785 !important;
+}
+
+.message-error {
+	border: 1px solid #ff9185 !important;
+	font-family: Arial,Helvetica,sans-serif;
+	background:#fdd3ce !important;
+	color:#c41f0d !important;
+}
+
+/* special case for report pages in which we also need a bottom margin */
+.report-content .message-box {
+	margin-bottom: 40px;
+}

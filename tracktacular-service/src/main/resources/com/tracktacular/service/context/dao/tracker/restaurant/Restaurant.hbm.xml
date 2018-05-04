@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    
+    <typedef name="encryptedString" class="org.jasypt.hibernate.type.EncryptedStringType">
+       <param name="encryptorRegisteredName">hibernateStringEncryptor</param>
+    </typedef>
+    
+    <class name="com.tracktacular.service.tracker.restaurant.Restaurant" table="tracker_restaurant_restaurants">
+	
+		<!-- Id -->
+    	<id name="id" column="id" type="long" unsaved-value="null">
+			<generator class="identity"/>
+		</id>
+		
+		
+		<!-- Version -->
+		<version name="version" column="version" unsaved-value="undefined" />
+		
+		
+		<!-- Global Properties -->
+		<property name="uid" column="uid" 
+		type="java.lang.String" length="36" unique="true" not-null="true" />
+		
+		<property name="timeCreated" column="time_created" 
+		type="long"	not-null="true" />
+		
+		<property name="timeModified" column="time_modified" 
+		type="long"	not-null="true" />
+		
+		<property name="persistableStateDate" column="persistable_state_date" 
+		type="org.joda.time.contrib.hibernate.PersistentDateTime" not-null="false" />
+		
+		<property name="persistableState" column="persistable_state" access="field"
+		length="10" not-null="false"> 
+			<type name="org.hibernate.type.EnumType"> 
+				<param name="enumClass">com.imadp.dao.PersistableState</param> 
+				<param name="type">12</param> 
+			</type> 
+		</property> 
+		
+		
+		<!-- Properties -->
+		<property name="name" column="name" 
+		length="1024" type="encryptedString" not-null="true" />
+		
+		<property name="city" column="city" 
+		length="1024" type="encryptedString" not-null="true" />
+		
+		<property name="state" column="state" 
+		length="1024" type="encryptedString" not-null="true" />
+		
+		<property name="tag" column="tag" 
+		length="1024" type="encryptedString" not-null="false" />
+		
+		<property name="notes" column="notes" 
+		length="100000" type="encryptedString" not-null="false" />
+
+		<property name="rating" column="rating" 
+		type="integer" not-null="false"/>
+		
+		<property name="targetDate" column="target_date" 
+		type="org.joda.time.contrib.hibernate.PersistentDateTime" not-null="false" />
+		
+		
+		<!-- References -->
+		<set name="meals" table="tracker_restaurant_meals" cascade="none" lazy="false" fetch="subselect" order-by="sort, timeCreated">
+        	<key column="restaurant_id" on-delete="noaction" update="false"/>
+        	<one-to-many class="com.tracktacular.service.tracker.restaurant.Meal"/>
+     	</set>	
+	    		
+		<many-to-one name="user" column="user_id" cascade="none" lazy="false" fetch="join" 
+		class="com.imadp.service.user.User" not-null="true" />
+		
+					 		 		
+    </class>
+</hibernate-mapping>

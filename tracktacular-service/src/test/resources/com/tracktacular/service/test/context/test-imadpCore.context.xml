@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+  -
+  - IMADPCore context
+  -
+  - Defines components shared throughout the application.
+  -
+  -->
+  
+<beans>
+
+		
+	<!-- Email Sender Mock Successful -->		
+	<bean id="emailSender" parent="coreComponent"
+	class="com.imadp.core.email.EmailSenderMockSuccessfulImpl" />
+	
+	
+</beans>

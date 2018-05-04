@@ -1,0 +1,122 @@
+<project 
+    xmlns="http://maven.apache.org/POM/4.0.0" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.tracktacular</groupId>
+		<artifactId>tracktacular</artifactId>
+		<version>1.0</version>
+		<relativePath>../tracktacular/pom.xml</relativePath>
+	</parent>
+
+	<artifactId>tracktacular-web</artifactId>
+	<packaging>war</packaging>
+
+	<properties>
+		<version.page>4.1</version.page>
+		<version.page.mobile>2.8</version.page.mobile>
+		<version.page.tracker.birthday>1.9</version.page.tracker.birthday>
+		<version.page.tracker.blood>2.0</version.page.tracker.blood>
+		<version.page.tracker.body>2.3</version.page.tracker.body>
+		<version.page.tracker.book>2.5</version.page.tracker.book>
+		<version.page.tracker.budget>2.0</version.page.tracker.budget>
+		<version.page.tracker.bucket>2.0</version.page.tracker.bucket>
+		<version.page.tracker.calendar>1.9</version.page.tracker.calendar>
+		<version.page.tracker.cholesterol>1.9</version.page.tracker.cholesterol>
+		<version.page.tracker.dream>1.9</version.page.tracker.dream>
+		<version.page.tracker.game>2.4</version.page.tracker.game>
+		<version.page.tracker.gift>1.8</version.page.tracker.gift>
+		<version.page.tracker.goal>1.9</version.page.tracker.goal>
+		<version.page.tracker.exercise>2.3</version.page.tracker.exercise>
+		<version.page.tracker.journal>2.0</version.page.tracker.journal>
+		<version.page.tracker.movie>2.4</version.page.tracker.movie>
+		<version.page.tracker.music>2.6</version.page.tracker.music>
+		<version.page.tracker.recipe>1.9</version.page.tracker.recipe>
+		<version.page.tracker.restaurant>2.4</version.page.tracker.restaurant>
+		<version.page.tracker.task>2.1</version.page.tracker.task>
+		<version.page.tracker.tv>2.4</version.page.tracker.tv>
+		<version.page.tracker.wish>1.8</version.page.tracker.wish>
+	</properties>
+
+	<build>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+		<plugins>
+		  <plugin>
+		  	<dependencies>
+		  	<dependency>
+		  		<groupId>org.sonatype.plexus</groupId>
+		  		<artifactId>plexus-build-api</artifactId>
+		  		<version>0.0.4</version>
+		  	</dependency>
+		  	</dependencies>
+		    <groupId>ro.isdc.wro4j</groupId>
+		    <artifactId>wro4j-maven-plugin</artifactId>
+		    <version>1.5.0</version>
+		    <executions>
+		      <execution>
+		      	<id>page</id>
+		        <phase>compile</phase>
+		        <goals>
+		          <goal>run</goal>
+		        </goals>
+		         <configuration>
+			      <minimize>true</minimize>
+			      <cssDestinationFolder>${project.build.directory}/${project.build.finalName}/static/tracktacular/css/</cssDestinationFolder>
+			      <jsDestinationFolder>${project.build.directory}/${project.build.finalName}/static/tracktacular/js/</jsDestinationFolder>
+			      <wroFile>${basedir}/target/classes/wro.xml</wroFile>
+			    </configuration>
+		      </execution>
+		      <execution>
+		      	<id>template</id>
+		        <phase>compile</phase>
+		        <goals>
+		          <goal>run</goal>
+		        </goals>
+		         <configuration>
+			      <minimize>true</minimize>
+			      <cssDestinationFolder>${project.build.directory}/${project.build.finalName}/static/tracktacular/css/</cssDestinationFolder>
+			      <jsDestinationFolder>${project.build.directory}/${project.build.finalName}/static/tracktacular/js/</jsDestinationFolder>
+			      <wroFile>${basedir}/target/classes/wro-template.xml</wroFile>
+			      <extraConfigFile>${basedir}/target/classes/wro-template.properties</extraConfigFile>
+			      <wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
+			    </configuration>
+		      </execution>
+		    </executions>
+		   
+		 </plugin>	
+		</plugins>
+
+	</build>
+
+	<dependencies>
+
+
+		<!-- IMADP -->
+		<dependency>
+			<groupId>com.imadp</groupId>
+			<artifactId>imadp-web-stripes</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+
+		<!-- Tracktacular -->
+		<dependency>
+			<groupId>com.tracktacular</groupId>
+			<artifactId>tracktacular-service</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+
+	</dependencies>
+	
+</project>

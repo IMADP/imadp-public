@@ -1,0 +1,117 @@
+<configuration>
+	<statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+	
+	
+	<!-- Properties -->
+	<property name="application" value="tracktacular"/>	
+	<property name="pattern" value="%date{ISO8601,America/New_York} %-5level [%thread] %class - %msg%n"/>	
+	<property name="minIndex" value="1"/>	
+	<property name="maxIndex" value="9"/>	
+	<property name="maxFileSize" value="10MB"/>	
+	<timestamp key="date" datePattern="MM-dd-yyyy-HH:mm:ss"/>
+	
+	
+	<!-- Rolling File Appender Debug -->
+	<appender name="ROLLING_DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+		<file>${catalina.base}/logs/${application}/${application}_debug.txt</file> 
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy"> 
+			<fileNamePattern>${catalina.base}/backup/logs/${application}/${application}_debug[%i]-${date}.zip</fileNamePattern> 
+			<minIndex>${minIndex}</minIndex> 
+			<maxIndex>${maxIndex}</maxIndex> 
+		</rollingPolicy> 
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy"> 
+			<maxFileSize>${maxFileSize}</maxFileSize> 
+		</triggeringPolicy> 
+		<encoder> 
+			<pattern>${pattern}</pattern> 
+		</encoder> 
+		<filter class="ch.qos.logback.classic.filter.LevelFilter"> 
+			<level>DEBUG</level> 
+			<onMatch>ACCEPT</onMatch> 
+			<onMismatch>DENY</onMismatch> 
+		</filter> 
+    </appender>  
+
+	
+	<!-- Rolling File Appender Info -->
+	<appender name="ROLLING_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+		<file>${catalina.base}/logs/${application}/${application}_info.txt</file> 
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy"> 
+			<fileNamePattern>${catalina.base}/backup/logs/${application}/${application}_info[%i]-${date}.zip</fileNamePattern> 
+			<minIndex>${minIndex}</minIndex> 
+			<maxIndex>${maxIndex}</maxIndex> 
+		</rollingPolicy> 
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy"> 
+			<maxFileSize>${maxFileSize}</maxFileSize> 
+		</triggeringPolicy> 
+		<encoder> 
+			<pattern>${pattern}</pattern> 
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter"> 
+			<level>INFO</level> 
+			<onMatch>ACCEPT</onMatch> 
+			<onMismatch>DENY</onMismatch> 
+		</filter> 		
+	</appender>  
+
+	
+	<!-- Rolling File Appender Warn -->
+	<appender name="ROLLING_WARN" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+		<file>${catalina.base}/logs/${application}/${application}_warn.txt</file> 
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy"> 
+			<fileNamePattern>${catalina.base}/backup/logs/${application}/${application}_warn[%i]-${date}.zip</fileNamePattern> 
+			<minIndex>${minIndex}</minIndex> 
+			<maxIndex>${maxIndex}</maxIndex> 
+		</rollingPolicy> 
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy"> 
+			<maxFileSize>${maxFileSize}</maxFileSize> 
+		</triggeringPolicy> 
+		<encoder> 
+			<pattern>${pattern}</pattern> 
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter"> 
+			<level>WARN</level> 
+			<onMatch>ACCEPT</onMatch> 
+			<onMismatch>DENY</onMismatch> 
+		</filter> 		
+	</appender>  
+
+	
+	<!-- Rolling File Appender Error -->
+	<appender name="ROLLING_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+		<file>${catalina.base}/logs/${application}/${application}_error.txt</file> 
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy"> 
+			<fileNamePattern>${catalina.base}/backup/logs/${application}/${application}_error[%i]-${date}.zip</fileNamePattern> 
+			<minIndex>${minIndex}</minIndex> 
+			<maxIndex>${maxIndex}</maxIndex> 
+		</rollingPolicy> 
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy"> 
+			<maxFileSize>${maxFileSize}</maxFileSize> 
+		</triggeringPolicy> 
+		<encoder> 
+			<pattern>${pattern}</pattern> 
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter"> 
+			<level>ERROR</level> 
+			<onMatch>ACCEPT</onMatch> 
+			<onMismatch>DENY</onMismatch> 
+		</filter> 
+	</appender>  
+
+	
+	<!-- Loggers -->
+	<logger name="com.imadp" level="DEBUG" />
+	
+	<logger name="com.tracktacular" level="DEBUG" />
+	
+	
+	<!-- Root Logger -->
+	<root level="INFO"> 
+		<appender-ref ref="ROLLING_DEBUG" /> 
+		<appender-ref ref="ROLLING_INFO" /> 
+		<appender-ref ref="ROLLING_WARN" /> 
+		<appender-ref ref="ROLLING_ERROR" /> 
+	</root> 
+	
+ 
+</configuration>

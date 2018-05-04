@@ -1,0 +1,79 @@
+
+
+/*
+ * Menu Tooltips
+ *
+ */ 
+menu {
+	display:none;	
+}
+
+.menu-option {
+	text-align:left;
+	border-bottom: 1px solid #E6E6E6;
+}
+
+.menu-option a {
+	display: block;
+	padding-left: 2px;
+	padding-right: 5px;
+	color: #00e;
+	font-size:13px;
+	text-decoration: none;
+	line-height: 20px;
+}
+
+.menu-option a .icon-s {
+	margin-bottom: -3px;	
+}
+
+.menu-option a:hover {
+	background: #E9F0F8;
+}
+
+.menu-option img {
+	padding-top:5px;
+	padding-bottom:5px;
+	padding-right:5px;
+}
+
+.menu-confirmation {
+	display:none;
+	color: #9F6000;
+	background-color: #FEEFB3;
+	border: 1px solid;
+	margin: 5px;
+	padding:10px 5px 10px 5px;
+	text-align: center;
+	font-size: 14px;
+}
+
+.menu-confirmation a {
+	display:inline;
+}
+
+.menu-confirmation a:hover {
+	background: #FEEFB3;
+}
+
+.menu-confirmation span{
+	display:block;
+	margin-bottom:5px;
+}
+
+.menu-busy-indicator {
+	margin-left:20px;
+	margin-top:3px;
+	display:none;					
+}
+
+.ui-tooltip hr {
+	padding:0;
+	margin:0;
+}
+
+.ui-tooltip-title {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 14px;
+	line-height: 14px;
+}
