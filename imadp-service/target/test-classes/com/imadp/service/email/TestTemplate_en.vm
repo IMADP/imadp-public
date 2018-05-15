@@ -1,4 +1,0 @@
-#set($subject = "Subject_en")
-#set($from = "From_en")
-#set($fromAlias = "FromAlias_en")
-SampleText_en

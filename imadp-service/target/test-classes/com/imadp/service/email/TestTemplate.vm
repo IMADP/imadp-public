@@ -1,4 +1,0 @@
-#set($subject = "Subject")
-#set($from = "From")
-#set($fromAlias = "FromAlias")
-SampleText
